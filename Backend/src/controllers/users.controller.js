@@ -23,7 +23,7 @@ const getUsersByRol = async (req, res) => {
 const getUserByRolAndState = async (req, res) => {
     try {
         const { isActive } = req.params;
-        const [result] = await UserModel.selectUserByRolAndState("Profesor",req.body)
+        const [result] = await UserModel.selectUserByRolAndState("Profesor",isActive)
         res.json(result);
     } catch (error) {
         res.json({ fatal: error.message });
