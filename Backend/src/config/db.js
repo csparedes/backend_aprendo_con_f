@@ -8,7 +8,7 @@ const pool = mysql.createPool({
     // Obtiene el usuario de la base de datos desde las variables de entorno    
     user: "root",
     // Obtiene la contraseña de la base de datos desde las variables de entorno
-    password: "",
+    password: "root",
     // Obtiene el puerto de la base de datos desde las variables de entorno
     port: "3306",
     // Obtiene el nombre de la base de datos desde las variables de entorno
@@ -17,9 +17,10 @@ const pool = mysql.createPool({
    // socketPath: process.env.DB_SOCKETPATH,
     // Habilita la interpretación de números decimales
     decimalNumbers: true
+    
 });
 
 // Asigna el pool de conexiones con promesas a una variable global llamada 'db'
-global.db = pool; // De esta manera puedo manejar Queries Async/Await
+global.db = pool.promise(); // De esta manera puedo manejar Queries Async/Await
 
 module.exports=pool
