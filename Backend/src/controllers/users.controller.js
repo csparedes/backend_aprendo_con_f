@@ -4,7 +4,7 @@ const getAllUsers = async (req, res) => {
     try {
         const [result] = await UserModel.selectAllUser();
         res.json(result);
-        
+
     } catch (error) {
         res.json({ fatal: error.message });
     }
@@ -14,6 +14,16 @@ const getUsersByRol = async (req, res) => {
     try {
         const { roleId } = req.params;
         const [result] = await UserModel.selectUserByRol(roleId)
+        res.json(result);
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+}
+
+const getUserByRolAndState = async (req, res) => {
+    try {
+        const { isActive } = req.params;
+        const [result] = await UserModel.selectUserByRolAndState("Profesor",req.body)
         res.json(result);
     } catch (error) {
         res.json({ fatal: error.message });
@@ -40,4 +50,4 @@ const deleteUser = (req, res) => {
     res.send('Borra alumno');
 }
 
-module.exports = { getAllUsers, createUser, updateUser, deleteUser, getUsersByRol }
+module.exports = { getAllUsers, createUser, updateUser, deleteUser, getUsersByRol, getUserByRolAndState }
