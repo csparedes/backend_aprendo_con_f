@@ -20,6 +20,36 @@ const getUsersByRol = async (req, res) => {
     }
 }
 
+const getDataByRol = async (req, res) => {
+    try {
+        const { roleId } = req.params;
+        const [result] = await UserModel.selectDataByRol(roleId)
+        res.json(result);
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+}
+
+const getDataByRolAndKnowledge = async (req, res) => {
+    try {
+        const { roleId } = req.params;
+        const [result] = await UserModel.selectDataByRolAndKnowledge(roleId)
+        res.json(result);
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+}
+
+const getDataByRolAndKnowledgeAndRating = async (req, res) => {
+    try {
+        const { roleId } = req.params;
+        const [result] = await UserModel.selectDataByRolAndKnowledgeAndRating(roleId)
+        res.json(result);
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+}
+
 const getUserByRolAndState = async (req, res) => {
     try {
         const { isActive } = req.params;
@@ -29,6 +59,8 @@ const getUserByRolAndState = async (req, res) => {
         res.json({ fatal: error.message });
     }
 }
+
+
 
 const createUser = async (req, res) => {
     try {
@@ -50,4 +82,4 @@ const deleteUser = (req, res) => {
     res.send('Borra alumno');
 }
 
-module.exports = { getAllUsers, createUser, updateUser, deleteUser, getUsersByRol, getUserByRolAndState }
+module.exports = { getAllUsers, createUser, updateUser, deleteUser, getUsersByRol, getUserByRolAndState, getDataByRol, getDataByRolAndKnowledge, getDataByRolAndKnowledgeAndRating }
