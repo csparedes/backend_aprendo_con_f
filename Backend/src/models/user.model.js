@@ -1,16 +1,31 @@
-const sqlDataByRol = 'select u.id, r.role_name, u.isActive, u.username, u.password, u.email, u.postal_code, u.country, u.name, u.image,  u.longitude, u.latitude, u.hourly_rate, u.phone '+
-    'from teacher_app.user u inner join teacher_app.role r on u.role_id = r.id ';
+const sqlDataProfessorActive = 'SELECT usr.id, usr.name, usr.email, usr.country, usr.city, usr.imageUrl, usr.hourly_rate, ka.teacher_id, ka.area '+
+    'FROM teacher_app.User usr '+
+    'JOIN teacher_app.knowledge_area ka ON usr.id = ka.teacher_id '+
+    'WHERE usr.role = ? '+
+    'AND usr.status=?' ;
 
-const sqlDataByRolAndKnowledge = 'select u.id, r.role_name, u.isActive, u.username, u.password, u.email, u.postal_code, u.country, u.name, u.image,  ka.area, u.longitude, u.latitude, u.hourly_rate, u.phone,ka.description'+
-    ' from teacher_app.user u inner join teacher_app.role r on u.role_id = r.id'+
-    ' join teacher_app.knowledge_area ka on u.id = ka.teacher_id   ';    
+const sqlDataProfessorByArea = 'SELECT usr.id, usr.name, ka.teacher_id, ka.area FROM teacher_app.User usr ' +
+    'JOIN teacher_app.Knowledge_area ka ON usr.id = ka.teacher_id '+
+    'WHERE usr.role = ? '+
+    'AND usr.status= ? ';
 
-const sqlDataByRolAndKnowledgeAndRating = 'select u.id, r.role_name, u.isActive, u.username, u.password, u.email, u.postal_code, u.country, u.name, u.image,  ka.area, u.longitude, u.latitude, u.hourly_rate, u.phone,ka.description, '+
-    ' (SELECT avg(rating) '+
-    ' FROM teacher_app.student_enrollment se'+
-    ' where se.teacher_id = u.id) as rating'+
-    ' from teacher_app.user u inner join teacher_app.role r on u.role_id = r.id'+
-    ' join teacher_app.knowledge_area ka on u.id = ka.teacher_id   ';       
+const sqlDataStudentsByProfesor = 'SELECT enr.id,enr.student_id,usr.name,ka.teacher_id,ka.category,ka.area,usr.email,enr.enrollment_date '+
+    'FROM teacher_app.student_enrollment enr '+
+    'JOIN teacher_app.User usr ON enr.student_id = usr.id '+
+    'JOIN teacher_app.Knowledge_Area ka ON enr.teacher_id = ka.teacher_id ' ;
+
+const sqlDataStudentsByArea = 'SELECT enr.id,enr.student_id,usr.name,usr.country,usr.city,ka.category,ka.area,usr.email,enr.rating,enr.enrollment_date '+
+    'FROM teacher_app.student_enrollment enr '+
+    'JOIN teacher_app.User usr ON enr.teacher_id = usr.id '+
+    'JOIN teacher_app.Knowledge_Area ka ON enr.teacher_id = ka.teacher_id ';   
+    
+const sqlDataStudentsById = 'SELECT usr.id,usr.name,usr.email,usr.country,usr.city,enka.area '+
+    'FROM teacher_app.User usr '+
+    'JOIN teacher_app.student_enrollment enst ON usr.id = enst.student_id '+
+    'JOIN teacher_app.knowledge_area enka ON enst.teacher_id=enka.teacher_id ';     
+
+const sqlDataUserStatus= 'SELECT id,name,email,country,city,imageUrl,hourly_rate,phone,description,role,status '+
+    'FROM teacher_app.User ';        
 
 /*Get All Registered Users*/
 const selectAllUser = () => {
@@ -27,24 +42,42 @@ const selectUserByRol = (roleId) => {
     return db.query('select * from teacher_app.user where role_id = ?', [roleId]);
 }
 
-/*Get  */
-const selectDataByRol = (roleId) => {
-    return db.query(sqlDataByRol + 'where u.role_id = ?' , [roleId]);
+
+/*Get All Active Professor Active */
+const selectProfessorActive= () => {
+    return db.query(sqlDataProfessorActive, ['professor' , 'active']);
 }
 
-const selectDataByRolAndKnowledge = (roleId) => {
-    return db.query(sqlDataByRolAndKnowledge + 'where u.role_id = ?' , [roleId]);
+/*Get All Active Professor Active By Id */
+const selectProfessorActiveById= (userId) => {
+    return db.query(sqlDataProfessorActive + 'AND usr.id=?', ['professor' , 'active', userId]);
 }
 
-const selectDataByRolAndKnowledgeAndRating = (roleId) => {
-    return db.query(sqlDataByRolAndKnowledgeAndRating + 'where u.role_id = ?' , [roleId]);
+/*Get  Professor By Area */
+const selectDataProfessorByArea= (userId) => {
+    return db.query(sqlDataProfessorByArea + 'AND usr.id=?', ['professor' , 'active', userId]);
 }
 
-/*Get All Active Professor - Get All Inactive Professors 
-select * from teacher_app.user u join teacher_app.role r on u.role_id = r.id where r.role_name = 'Profesor' and u.isActive = 1*/
-const selectUserByRolAndState = (isActive, roleName) => {
-    return db.query('select * from teacher_app.user u join teacher_app.role r on u.role_id = r.id where r.role_name = ? and u.isActive = ?', [roleName , isActive]);
+/*Get Student by  Professor*/
+const selectDataStudentsByProfesor= (teacherId) => {
+    return db.query(sqlDataStudentsByProfesor + 'WHERE enr.teacher_id = ? ORDER BY enr.teacher_id', [teacherId]);
 }
+
+/*Get Student by Area*/
+const selectDataStudentsByArea= (studenId) => {
+    return db.query(sqlDataStudentsByArea + 'WHERE enr.student_id = ?', [studenId]);
+}
+
+/*Get Student by Id*/
+const selectDataStudentsById= (studenId) => {
+    return db.query(sqlDataStudentsById + 'WHERE usr.role = ? AND enst.student_id= ?', ['student', studenId]);
+}
+
+/*Get User Administrator*/
+const selectDataUserStatus= (status) => {
+    return db.query(sqlDataUserStatus + 'WHERE status=?', [status]);
+}
+
 
 /*insert usuario*/ 
 const insertUser = ({username,password,email,name,postal_code,country,role_id,isActive,longitude,latitude,experience,hourly_rate,image,phone}) => {
@@ -54,4 +87,4 @@ const insertUser = ({username,password,email,name,postal_code,country,role_id,is
 }
 
 
-module.exports = {selectAllUser, selectUserByRol, insertUser, selectUserByRolAndState, selectDataByRol,selectDataByRolAndKnowledge, selectDataByRolAndKnowledgeAndRating}
+module.exports = {selectAllUser, selectUserByRol, insertUser, selectProfessorActive,selectProfessorActiveById,selectDataProfessorByArea, selectDataStudentsByProfesor, selectDataStudentsByArea, selectDataStudentsById, selectDataUserStatus}

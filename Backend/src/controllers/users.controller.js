@@ -20,40 +20,75 @@ const getUsersByRol = async (req, res) => {
     }
 }
 
-const getDataByRol = async (req, res) => {
+const getProfessorActive = async (req, res) => {
     try {
-        const { roleId } = req.params;
-        const [result] = await UserModel.selectDataByRol(roleId)
+        const [result] = await UserModel.selectProfessorActive();
         res.json(result);
     } catch (error) {
         res.json({ fatal: error.message });
     }
 }
 
-const getDataByRolAndKnowledge = async (req, res) => {
+const getProfessorActiveById = async (req, res) => {
     try {
-        const { roleId } = req.params;
-        const [result] = await UserModel.selectDataByRolAndKnowledge(roleId)
+        const { userId } = req.params;
+        const [result] = await UserModel.selectProfessorActiveById(userId);
+        
         res.json(result);
     } catch (error) {
         res.json({ fatal: error.message });
     }
 }
 
-const getDataByRolAndKnowledgeAndRating = async (req, res) => {
+const getDataProfessorByArea = async (req, res) => {
     try {
-        const { roleId } = req.params;
-        const [result] = await UserModel.selectDataByRolAndKnowledgeAndRating(roleId)
+        const { userId } = req.params;
+        const [result] = await UserModel.selectDataProfessorByArea(userId);
+        
         res.json(result);
     } catch (error) {
         res.json({ fatal: error.message });
     }
 }
 
-const getUserByRolAndState = async (req, res) => {
+const getDataStudentsByProfesor = async (req, res) => {
     try {
-        const { isActive } = req.params;
-        const [result] = await UserModel.selectUserByRolAndState("Profesor",isActive)
+        const { userId } = req.params;
+        const [result] = await UserModel.selectDataStudentsByProfesor(userId);
+        
+        res.json(result);
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+}
+
+const getDataStudentsByArea = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const [result] = await UserModel.selectDataStudentsByArea(userId);
+        
+        res.json(result);
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+}
+
+const getDataStudentsById = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const [result] = await UserModel.selectDataStudentsById(userId);
+        
+        res.json(result);
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+}
+
+const getDataUserStatus = async (req, res) => {
+    try {
+        const { status } = req.params;
+        const [result] = await UserModel.selectDataUserStatus(status);
+        
         res.json(result);
     } catch (error) {
         res.json({ fatal: error.message });
@@ -82,4 +117,4 @@ const deleteUser = (req, res) => {
     res.send('Borra alumno');
 }
 
-module.exports = { getAllUsers, createUser, updateUser, deleteUser, getUsersByRol, getUserByRolAndState, getDataByRol, getDataByRolAndKnowledge, getDataByRolAndKnowledgeAndRating }
+module.exports = { getAllUsers, createUser, updateUser, deleteUser, getUsersByRol, getProfessorActive, getProfessorActiveById, getDataProfessorByArea, getDataStudentsByProfesor, getDataStudentsByArea, getDataStudentsById, getDataUserStatus }
