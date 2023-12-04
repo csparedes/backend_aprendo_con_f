@@ -1,4 +1,4 @@
-const sqlDataProfessorActive = 'SELECT usr.id, usr.name, usr.email, usr.country, usr.city, usr.imageUrl, usr.hourly_rate, ka.teacher_id, ka.area '+
+const sqlDataProfessorActive = 'SELECT usr.id, usr.name, usr.email, usr.country, usr.city, usr.imageUrl, usr.hourly_rate, ka.teacher_id, ka.area,usr.phone, usr.description,usr.experience '+
     'FROM teacher_app.User usr '+
     'JOIN teacher_app.knowledge_area ka ON usr.id = ka.teacher_id '+
     'WHERE usr.role = ? '+
@@ -24,8 +24,26 @@ const sqlDataStudentsById = 'SELECT usr.id,usr.name,usr.email,usr.country,usr.ci
     'JOIN teacher_app.student_enrollment enst ON usr.id = enst.student_id '+
     'JOIN teacher_app.knowledge_area enka ON enst.teacher_id=enka.teacher_id ';     
 
-const sqlDataUserStatus= 'SELECT id,name,email,country,city,imageUrl,hourly_rate,phone,description,role,status '+
-    'FROM teacher_app.User ';        
+const sqlDataUserStatus= 'SELECT * FROM teacher_app.User ';        
+
+const sqlAllDataProfesor= 'SELECT usr.id,usr.name,usr.email,usr.country,usr.city,usr.imageUrl,usr.hourly_rate,usr.role,usr.experience,usr.description,ka.teacher_id,GROUP_CONCAT(ka.area SEPARATOR \',\') AS areas,ROUND(subquery.rating,2) AS rating '+
+'FROM teacher_app.User usr JOIN teacher_app.Knowledge_area ka ON usr.id = ka.teacher_id '+
+'LEFT JOIN ( '+
+'  SELECT enr.teacher_id, AVG(enr.rating) AS rating '+
+'  FROM teacher_app.student_enrollment enr '+
+'  GROUP BY enr.teacher_id '+
+') AS subquery ON usr.id = subquery.teacher_id '+
+'WHERE usr.role = ? AND usr.status = ? '+
+'GROUP BY usr.id, usr.name, usr.email, usr.country, usr.city, usr.imageUrl, usr.hourly_rate, ka.teacher_id, subquery.rating ';
+
+const sqlAllDataEstudiante= 'SELECT usr.id,usr.name,usr.email,usr.country,usr.city,usr.status,GROUP_CONCAT(enka.area SEPARATOR  \',\') AS areas '+
+    'FROM teacher_app.User usr '+
+    'JOIN teacher_app.student_enrollment enst ON usr.id = enst.student_id '+
+    'JOIN teacher_app.knowledge_area enka ON enst.teacher_id=enka.teacher_id '+
+    'WHERE usr.role = ? AND usr.status = ? '+
+    'GROUP BY usr.id, usr.name, usr.email, usr.country, usr.city ';
+
+const sqlDatosByRol= 'SELECT * FROM teacher_app.user where role = ?';  
 
 /*Get All Registered Users*/
 const selectAllUser = () => {
@@ -45,17 +63,17 @@ const selectUserByRol = (roleId) => {
 
 /*Get All Active Professor Active */
 const selectProfessorActive= () => {
-    return db.query(sqlDataProfessorActive, ['professor' , 'active']);
+    return db.query(sqlDataProfessorActive, ['profesor' , 'activo']);
 }
 
 /*Get All Active Professor Active By Id */
 const selectProfessorActiveById= (userId) => {
-    return db.query(sqlDataProfessorActive + 'AND usr.id=?', ['professor' , 'active', userId]);
+    return db.query(sqlDataProfessorActive + 'AND usr.id=?', ['profesor' , 'activo', userId]);
 }
 
 /*Get  Professor By Area */
 const selectDataProfessorByArea= (userId) => {
-    return db.query(sqlDataProfessorByArea + 'AND usr.id=?', ['professor' , 'active', userId]);
+    return db.query(sqlDataProfessorByArea + 'AND usr.id=?', ['profesor' , 'activo', userId]);
 }
 
 /*Get Student by  Professor*/
@@ -70,7 +88,7 @@ const selectDataStudentsByArea= (studenId) => {
 
 /*Get Student by Id*/
 const selectDataStudentsById= (studenId) => {
-    return db.query(sqlDataStudentsById + 'WHERE usr.role = ? AND enst.student_id= ?', ['student', studenId]);
+    return db.query(sqlDataStudentsById + 'WHERE usr.role = ? AND enst.student_id= ?', ['estudiante', studenId]);
 }
 
 /*Get User Administrator*/
@@ -78,13 +96,42 @@ const selectDataUserStatus= (status) => {
     return db.query(sqlDataUserStatus + 'WHERE status=?', [status]);
 }
 
+/*Get All Profesores activos*/
+const selectAllProfesorByStatus = (status) => {
+    return db.query(sqlAllDataProfesor, ['profesor', status]);
+}
 
-/*insert usuario*/ 
-const insertUser = ({username,password,email,name,postal_code,country,role_id,isActive,longitude,latitude,experience,hourly_rate,image,phone}) => {
-    return db.query('insert into teacher_app.user(username,password,email,name,postal_code,country,role_id,isActive,longitude,latitude,experience,hourly_rate,image,phone) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
-    [username, password,email, name, postal_code, country, role_id, isActive, longitude, latitude, experience, hourly_rate,image,phone])
+/*Get All Estudiante por estado*/
+const selectAllDataEstudiante= (status) => {
+    return db.query(sqlAllDataEstudiante , ['estudiante', status]);
+}
 
+/*Get Datos por rol*/
+const selectDatosByRol= (role) => {
+    return db.query(sqlDatosByRol , [role]);
 }
 
 
-module.exports = {selectAllUser, selectUserByRol, insertUser, selectProfessorActive,selectProfessorActiveById,selectDataProfessorByArea, selectDataStudentsByProfesor, selectDataStudentsByArea, selectDataStudentsById, selectDataUserStatus}
+/*insert usuario*/ 
+
+const insertUser = ({username,password,email,name,postal_code,country,longitude,latitude,experience,hourly_rate,imageUrl,phone,role,description,status,city}) => {
+    return db.query('INSERT INTO teacher_app.user(username,password,email,name,postal_code,country,longitude,latitude,experience,hourly_rate,imageUrl,phone,role,description,status,city) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+    [username,password,email,name,postal_code,country,longitude,latitude,experience,hourly_rate,imageUrl,phone,role,description,status,city])
+
+}
+
+//actualiza todos los datos del usuario
+const updateUserById = (userId, {username,password,email,name,postal_code,country,longitude,latitude,experience,hourly_rate,imageUrl,phone,role,description,status,city}) =>{
+    return db.query('UPDATE teacher_app.user SET username = ?, password = ?, email = ?, name = ?, postal_code = ?, country = ?, longitude = ?, latitude = ?, experience = ?, hourly_rate = ?, imageUrl = ?, phone = ?, role = ?, description = ?, status = ?, city = ? WHERE id = ?', 
+    [username,password,email,name,postal_code,country,longitude,latitude,experience,hourly_rate,imageUrl,phone,role,description,status,city, userId]);
+}
+
+//actualiza el estado del usuario
+
+const updateEstadoById = (userId, {status}) =>{
+    return db.query('UPDATE teacher_app.user SET status = ? WHERE id = ?', [status,userId]);
+}
+
+
+module.exports = {selectAllUser, selectUserByRol, insertUser, selectProfessorActive,selectProfessorActiveById,selectDataProfessorByArea, selectDataStudentsByProfesor, selectDataStudentsByArea, selectDataStudentsById, selectDataUserStatus, selectUserById, 
+    selectAllProfesorByStatus, selectAllDataEstudiante, selectDatosByRol, updateUserById, updateEstadoById}

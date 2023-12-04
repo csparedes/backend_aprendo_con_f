@@ -13,8 +13,9 @@ app.get('/', (req, res) => {
   res.send('<center><h3>Bienvenido a</h3><br/><h2>Express</h2><center>');
 });
 
-app.use('/api',require('../routes/api_roles.js'))  //Ruta de Roles de usuario
-app.use('/api',require('../routes/api_users.js'))  //Rutas de usuarios en general
+/*app.use('/api',require('../routes/api_roles.js'))  //Ruta de Roles de usuario
+app.use('/api',require('../routes/api_users.js'))  //Rutas de usuarios en general*/
+app.use('/api',require('../routes/api'));
 // Fin de Rutas ---
 
 // Manejo de errores
