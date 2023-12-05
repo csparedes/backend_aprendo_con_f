@@ -26,7 +26,7 @@ const sqlDataStudentsById = 'SELECT usr.id,usr.name,usr.email,usr.country,usr.ci
 
 const sqlDataUserStatus= 'SELECT * FROM teacher_app.User ';        
 
-const sqlAllDataProfesor= 'SELECT usr.id,usr.name,usr.email,usr.country,usr.city,usr.imageUrl,usr.hourly_rate,usr.role,usr.experience,usr.description,ka.teacher_id,GROUP_CONCAT(ka.area SEPARATOR \',\') AS areas,ROUND(subquery.rating,2) AS rating '+
+const sqlAllDataProfesor= 'SELECT usr.id,usr.name,usr.email,usr.country,usr.city,usr.imageUrl,usr.hourly_rate,usr.role,usr.experience,usr.description,ka.teacher_id,GROUP_CONCAT(ka.area SEPARATOR \',\') AS areas,FLOOR(ROUND(subquery.rating,2)) AS rating '+
 'FROM teacher_app.User usr JOIN teacher_app.Knowledge_area ka ON usr.id = ka.teacher_id '+
 'LEFT JOIN ( '+
 '  SELECT enr.teacher_id, AVG(enr.rating) AS rating '+
@@ -36,11 +36,28 @@ const sqlAllDataProfesor= 'SELECT usr.id,usr.name,usr.email,usr.country,usr.city
 'WHERE usr.role = ? AND usr.status = ? '+
 'GROUP BY usr.id, usr.name, usr.email, usr.country, usr.city, usr.imageUrl, usr.hourly_rate, ka.teacher_id, subquery.rating ';
 
+const sqlAllDataProfesorById= 'SELECT usr.id,usr.name,usr.email,usr.country,usr.city,usr.imageUrl,usr.hourly_rate,usr.role,usr.experience,usr.description,ka.teacher_id,GROUP_CONCAT(ka.area SEPARATOR \',\') AS areas,FLOOR(ROUND(subquery.rating,2)) AS rating '+
+'FROM teacher_app.User usr JOIN teacher_app.Knowledge_area ka ON usr.id = ka.teacher_id '+
+'LEFT JOIN ( '+
+'  SELECT enr.teacher_id, AVG(enr.rating) AS rating '+
+'  FROM teacher_app.student_enrollment enr '+
+'  GROUP BY enr.teacher_id '+
+') AS subquery ON usr.id = subquery.teacher_id '+
+'WHERE usr.role = ? AND usr.status = ? and usr.id = ? '+
+'GROUP BY usr.id, usr.name, usr.email, usr.country, usr.city, usr.imageUrl, usr.hourly_rate, ka.teacher_id, subquery.rating ';
+
 const sqlAllDataEstudiante= 'SELECT usr.id,usr.name,usr.email,usr.country,usr.city,usr.status,GROUP_CONCAT(enka.area SEPARATOR  \',\') AS areas '+
     'FROM teacher_app.User usr '+
     'JOIN teacher_app.student_enrollment enst ON usr.id = enst.student_id '+
     'JOIN teacher_app.knowledge_area enka ON enst.teacher_id=enka.teacher_id '+
     'WHERE usr.role = ? AND usr.status = ? '+
+    'GROUP BY usr.id, usr.name, usr.email, usr.country, usr.city ';
+
+const sqlAllDataEstudianteById= 'SELECT usr.id,usr.name,usr.email,usr.country,usr.city,usr.status,GROUP_CONCAT(enka.area SEPARATOR  \',\') AS areas '+
+    'FROM teacher_app.User usr '+
+    'JOIN teacher_app.student_enrollment enst ON usr.id = enst.student_id '+
+    'JOIN teacher_app.knowledge_area enka ON enst.teacher_id=enka.teacher_id '+
+    'WHERE usr.role = ? AND usr.status = ? and usr.id =? '+
     'GROUP BY usr.id, usr.name, usr.email, usr.country, usr.city ';
 
 const sqlDatosByRol= 'SELECT * FROM teacher_app.user where role = ?';  
@@ -111,6 +128,16 @@ const selectDatosByRol= (role) => {
     return db.query(sqlDatosByRol , [role]);
 }
 
+/*Get All Profesores activos por id*/
+const selectAllProfesorByStatusAndId = (status, userId) => {
+    return db.query(sqlAllDataProfesorById, ['profesor', status, userId]);
+}
+
+/*Get All Profesores activos por id*/
+const selectAllDataEstudianteById = (status, userId) => {
+    return db.query(sqlAllDataEstudianteById, ['estudiante', status, userId]);
+}
+
 
 /*insert usuario*/ 
 
@@ -132,6 +159,10 @@ const updateEstadoById = (userId, {status}) =>{
     return db.query('UPDATE teacher_app.user SET status = ? WHERE id = ?', [status,userId]);
 }
 
+//borrar el usuario
+const deleteUser = (userId) =>{
+    return db.query('DELETE FROM teacher_app.user WHERE id = ?', [userId]);
+}
 
 module.exports = {selectAllUser, selectUserByRol, insertUser, selectProfessorActive,selectProfessorActiveById,selectDataProfessorByArea, selectDataStudentsByProfesor, selectDataStudentsByArea, selectDataStudentsById, selectDataUserStatus, selectUserById, 
-    selectAllProfesorByStatus, selectAllDataEstudiante, selectDatosByRol, updateUserById, updateEstadoById}
+    selectAllProfesorByStatus, selectAllDataEstudiante, selectDatosByRol, updateUserById, updateEstadoById, selectAllProfesorByStatusAndId, selectAllDataEstudianteById}

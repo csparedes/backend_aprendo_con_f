@@ -11,7 +11,9 @@ router.get('/student/area/:userId', UserController.getDataStudentsByArea);
 router.get('/student/:userId', UserController.getDataStudentsById); //Obtiene los datos del estudiante por id
 router.get('/:status', UserController.getDataUserStatus); //Obtiene todos los datos por status
 router.get('/profesores/:status', UserController.getAllDataProfesores);  //Obtiene todos los datos del profesor incluido rating y area
+router.get('/profesores/:status/:userId', UserController.getAllDataProfesoresById);  //Obtiene todos los datos del profesor incluido rating y area por status y Id
 router.get('/estudiante/:status', UserController.getAllDataEstudiante); //Obtiene todos los datos del estudiante incluido  area
+router.get('/estudiante/:status/:userId', UserController.getAllDataEstudianteById); //Obtiene todos los datos del estudiante incluido  area por status y Id
 router.get('/datos/:role', UserController.getDatosByRol); //Obtiene todos datos por rol
 router.get('/data/:userId', UserController.getDatosById); //Obtiene todos datos por id
 
