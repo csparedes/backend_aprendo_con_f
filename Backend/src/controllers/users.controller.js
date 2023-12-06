@@ -167,10 +167,23 @@ const createUser = async (req, res) => {
     try {
         const [result] = await UserModel.insertUser(req.body);
         const [user] = await UserModel.selectUserById(result.insertId)
-        res.json(user);
+        const resultado = {
+            respuesta: true,
+            mensaje: 'Usuario insertado con éxito',
+            resultado: user
+        }
+        res.json(resultado);
 
     } catch (error) {
-        res.json({ fatal: error.message });
+        let mensaje = "";
+        if (error.code == 'ER_DUP_ENTRY') {
+            mensaje = 'El email ingresado ya se encuentra registrado'
+        }
+        res.json({
+            respuesta: false,
+            fatal: error.message,
+            mensaje: mensaje
+        });
     }
 
 }
