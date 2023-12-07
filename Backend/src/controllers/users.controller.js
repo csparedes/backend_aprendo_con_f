@@ -1,5 +1,6 @@
 const db=require('../config/db')
 const UserModel = require('../models/user.model');
+const bcrypt = require('bcryptjs');
 
 const getAllUsers = async (req, res) => {
     try {
@@ -213,5 +214,68 @@ const deleteUser = (req, res) => {
     res.send('Borra usuario');
 }
 
+//REGISTRO DE USUSARIOS
+const register = async(req, res) => {
+    try {
+        // Encriptamos el password
+        req.body.password = bcrypt.hashSync(req.body.password, 8);
+        console.log(req.body);
+        const [result] = await UserModel.insertUser(req.body);
+        const [user] = await UserModel.selectUserById(result.insertId)
+        const resultado = {
+            respuesta: true,
+            mensaje: 'Usuario insertado con éxito',
+            resultado: user
+        }
+        res.json(resultado);
+
+    } catch (error) {
+        let mensaje = "";
+        if (error.code == 'ER_DUP_ENTRY') {
+            mensaje = 'El email ingresado ya se encuentra registrado'
+        }
+        res.json({
+            respuesta: false,
+            fatal: error.message,
+            mensaje: mensaje
+        });
+    }
+}
+
+//LOGIN DE USUARIOS
+const login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        //Revisión de email en base de datos;
+        const [result] = await UserModel.verificaCorreo(email, 'El correo existe', 'El correo no existe');
+        const valores = Object.values(result[0]); //El correo existe o no existe
+        if (valores == 'El correo no existe') {
+            return res.json({
+                    respuesta: false,
+                    mensaje: 'correo o password incorrectos',
+                    resultado: null
+            });
+        }
+        //coinicide el password de la base de datos con la de l body
+        const [user] = await UserModel.userByEmail(email);
+        console.log(user[0].password);
+        const equals = bcrypt.compareSync(password, user[0].password);
+        if (!equals) {
+            return res.json({
+                    respuesta: false,
+                    mensaje: 'correo o password incorrectos',
+                    resultado: null
+            });
+        }   
+        res.json({
+                    respuesta: true,
+                    mensaje: 'Login corecto',
+                    resultado: 'Enviar token'
+            }); 
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+}
+
 module.exports = { getAllUsers, createUser, updateUser, deleteUser, getUsersByRol, getProfessorActive, getProfessorActiveById, getDataProfessorByArea, getDataStudentsByProfesor, getDataStudentsByArea, getDataStudentsById, getDataUserStatus,
-    getAllDataProfesores, getAllDataEstudiante, getDatosByRol, getDatosById, updateUserEstadoById, getAllDataProfesoresById, getAllDataEstudianteById }
+    getAllDataProfesores, getAllDataEstudiante, getDatosByRol, getDatosById, updateUserEstadoById, getAllDataProfesoresById, getAllDataEstudianteById,register,login }

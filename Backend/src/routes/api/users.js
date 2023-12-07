@@ -22,5 +22,9 @@ router.put('/:userId', UserController.updateUser); //actualizar datos usuario
 router.put('/estado/:userId', UserController.updateUserEstadoById); //actualizar el estado del usuario por id
 router.delete('/:userId', UserController.deleteUser); 
 
+//Login y Registro de Usuarios
+router.post('/register', UserController.register);
+router.post('/login', UserController.login);
+
 
 module.exports = router;
