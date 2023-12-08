@@ -16,6 +16,8 @@ router.get('/estudiante/:status', UserController.getAllDataEstudiante); //Obtien
 router.get('/estudiante/:status/:userId', UserController.getAllDataEstudianteById); //Obtiene todos los datos del estudiante incluido  area por status y Id
 router.get('/datos/:role', UserController.getDatosByRol); //Obtiene todos datos por rol
 router.get('/data/:userId', UserController.getDatosById); //Obtiene todos datos por id
+router.get('/prof/allProfesor', UserController.getAllProfesor);//Devuelve todos los profesores
+router.get('/est/allEstudiante', UserController.getAllEstudiante);//Devuelve todos los estudiante
 
 router.post('/', UserController.createUser); //insertar datos usuario
 router.put('/:userId', UserController.updateUser); //actualizar datos usuario
@@ -24,3 +26,4 @@ router.delete('/:userId', UserController.deleteUser);
 
 
 module.exports = router;
+

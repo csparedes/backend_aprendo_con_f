@@ -1,5 +1,6 @@
 const db=require('../config/db')
 const UserModel = require('../models/user.model');
+const KnowledgeModel = require('../models/knowledge_area.model');
 
 const getAllUsers = async (req, res) => {
     try {
@@ -162,6 +163,26 @@ const getAllDataEstudianteById = async (req, res) => {
     }
 }
 
+const getAllProfesor = async (req, res) => {
+    try {        
+        const [result] = await UserModel.selectAllProfesor();
+        
+        res.json(result);
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+}
+
+const getAllEstudiante = async (req, res) => {
+    try {        
+        const [result] = await UserModel.selectAllEstudiante();
+        
+        res.json(result);
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+}
+
 
 const createUser = async (req, res) => {
     try {
@@ -208,10 +229,20 @@ const updateUserEstadoById = async (req, res) => {
     }
 }
 
+const insertKnowledgeForProfesor = async (req, res) => {
+    try {
+        const [user] = await UserModel.createUser();        
+        const [result] = await UserModel.selectAllProfesorByStatusAndId(user.status, user.id)        
+
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+}
+
 
 const deleteUser = (req, res) => {
     res.send('Borra usuario');
 }
 
 module.exports = { getAllUsers, createUser, updateUser, deleteUser, getUsersByRol, getProfessorActive, getProfessorActiveById, getDataProfessorByArea, getDataStudentsByProfesor, getDataStudentsByArea, getDataStudentsById, getDataUserStatus,
-    getAllDataProfesores, getAllDataEstudiante, getDatosByRol, getDatosById, updateUserEstadoById, getAllDataProfesoresById, getAllDataEstudianteById }
+    getAllDataProfesores, getAllDataEstudiante, getDatosByRol, getDatosById, updateUserEstadoById, getAllDataProfesoresById, getAllDataEstudianteById, getAllProfesor, getAllEstudiante }
