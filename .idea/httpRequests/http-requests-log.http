@@ -1,0 +1,360 @@
+PUT http://localhost:3001/api/enrollments/1
+Content-Type: application/json
+Content-Length: 80
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "rating": 4,
+  "review": "One of the best installations I have ever seen."
+}
+
+<> 2023-12-08T143811.200.json
+
+###
+
+PUT http://localhost:3001/api/enrollments/1
+Content-Type: application/json
+Content-Length: 80
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "rating": 4,
+  "review": "One of the best installations I have ever seen."
+}
+
+<> 2023-12-08T143720.200.json
+
+###
+
+PUT http://localhost:3001/api/enrollments/1
+Content-Type: application/json
+Content-Length: 80
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "rating": 4,
+  "review": "One of the best installations I have ever seen."
+}
+
+<> 2023-12-08T143642.200.json
+
+###
+
+PUT http://localhost:3001/api/enrollments/enrollmentId/1
+Content-Type: application/json
+Content-Length: 80
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "rating": 4,
+  "review": "One of the best installations I have ever seen."
+}
+
+<> 2023-12-08T143327.404.html
+
+###
+
+PUT http://localhost:3001/api/enrollments/enrollmentId/1
+Content-Type: application/json
+Content-Length: 80
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "rating": 4,
+  "review": "One of the best installations I have ever seen."
+}
+
+<> 2023-12-08T143116.404.html
+
+###
+
+PUT http://localhost:3001/api/enrollments/enrollmentId/1
+Content-Type: application/json
+Content-Length: 80
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "rating": 4,
+  "review": "One of the best installations I have ever seen."
+}
+
+<> 2023-12-08T142547.404.html
+
+###
+
+PUT http://localhost:3001/api/enrollments/enrollmentId/1
+Content-Type: application/json
+Content-Length: 80
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "rating": 4,
+  "review": "One of the best installations I have ever seen."
+}
+
+<> 2023-12-08T142320.404.html
+
+###
+
+PUT http://localhost:3001/api/enrollments/enrollmentId/1
+Content-Type: application/json
+Content-Length: 80
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "rating": 4,
+  "review": "One of the best installations I have ever seen."
+}
+
+<> 2023-12-08T135759.404.html
+
+###
+
+PUT http://localhost:3001/api/enrollments/enrollmentId/1
+Content-Type: application/json
+Content-Length: 80
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "rating": 4,
+  "review": "One of the best installations I have ever seen."
+}
+
+<> 2023-12-08T135734.404.html
+
+###
+
+PUT http://localhost:3001/api/enrollments/enrollmentId/1
+Content-Type: application/json
+Content-Length: 80
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "rating": 4,
+  "review": "One of the best installations I have ever seen."
+}
+
+<> 2023-12-08T135712.404.html
+
+###
+
+PUT http://localhost:3001/api/enrollments/enrollmentId/1
+Content-Type: application/json
+Content-Length: 80
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "rating": 4,
+  "review": "One of the best installations I have ever seen."
+}
+
+<> 2023-12-08T100854.404.html
+
+###
+
+GET http://localhost:3001/api/users
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-08T100757.200.json
+
+###
+
+GET http://localhost:3001/api/users/student/14
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-08T100733.200.json
+
+###
+
+GET http://localhost:3001/api/users/student/14
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-08T100719.200.json
+
+###
+
+GET http://localhost:3001/api/users/student/14
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-08T100646.200.json
+
+###
+
+GET http://localhost:3001/api/users/student/14
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-08T084705.200.json
+
+###
+
+GET http://localhost:3001/api/users/student/14
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-08T084542.200.json
+
+###
+
+GET http://localhost:3001/api/users/student/14
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-08T084229.200.json
+
+###
+
+GET http://localhost:3001/api/users/profesor/4
+Content-Length: 17
+Content-Type: */*; charset=UTF-8
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+/profesor/:userId
+
+<> 2023-12-08T084143.200.json
+
+###
+
+GET http://localhost:3001/api/users/profesor/4
+Content-Length: 17
+Content-Type: */*; charset=UTF-8
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+/profesor/:userId
+
+<> 2023-12-08T084050.200.json
+
+###
+
+GET http://localhost:3001/api/users
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-08T083905.200.json
+
+###
+
+PUT http://localhost:3001/api/enrollments/enrollmentId/1
+Content-Type: application/json
+Content-Length: 166
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "rating": 4,
+  "review": "One of the best installations I have ever seen."
+}
+
+
+//const [user] = await enrollmentModel.selectEnrollmentStudentById(result.insertId)
+
+<> 2023-12-08T074141.500.html
+
+###
+
+PUT http://localhost:3001/api/enrollments/enrollmentId/1
+Content-Type: application/json
+Content-Length: 166
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "rating": 4,
+  "review": "One of the best installations I have ever seen."
+}
+
+
+//const [user] = await enrollmentModel.selectEnrollmentStudentById(result.insertId)
+
+<> 2023-12-08T073652.500.html
+
+###
+
+PUT http://localhost:3001/api/enrollments/enrollmentId/1
+Content-Type: application/json
+Content-Length: 56
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "rating": 4,
+  "review": "GraphQl the new way of "
+}
+
+<> 2023-12-08T072841.404.html
+
+###
+
+PUT http://localhost:3001/api/users/enrollmentId/1
+Content-Type: application/json
+Content-Length: 56
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "rating": 4,
+  "review": "GraphQl the new way of "
+}
+
+<> 2023-12-08T072704.404.html
+
+###
+
+PUT http://localhost:3001/api/users/enrollmentId/1
+Content-Type: application/json
+Content-Length: 56
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "rating": 4,
+  "review": "GraphQl the new way of "
+}
+
+<> 2023-12-08T072655.404.html
+
+###
+

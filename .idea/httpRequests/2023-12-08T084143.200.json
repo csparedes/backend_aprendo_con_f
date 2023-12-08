@@ -1,0 +1,44 @@
+[
+  {
+    "id": 4,
+    "name": "Fernanda Montero",
+    "email": "fernanda@gmail.com",
+    "country": "España",
+    "city": "Malaga",
+    "imageUrl": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "hourly_rate": 30,
+    "teacher_id": 4,
+    "area": "Calculo",
+    "phone": "+34 123456789",
+    "description": "5 años de experiencia enseñando Matemáticas, física y química",
+    "experience": 5
+  },
+  {
+    "id": 4,
+    "name": "Fernanda Montero",
+    "email": "fernanda@gmail.com",
+    "country": "España",
+    "city": "Malaga",
+    "imageUrl": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "hourly_rate": 30,
+    "teacher_id": 4,
+    "area": "Algebra",
+    "phone": "+34 123456789",
+    "description": "5 años de experiencia enseñando Matemáticas, física y química",
+    "experience": 5
+  },
+  {
+    "id": 4,
+    "name": "Fernanda Montero",
+    "email": "fernanda@gmail.com",
+    "country": "España",
+    "city": "Malaga",
+    "imageUrl": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "hourly_rate": 30,
+    "teacher_id": 4,
+    "area": "Probabilidad",
+    "phone": "+34 123456789",
+    "description": "5 años de experiencia enseñando Matemáticas, física y química",
+    "experience": 5
+  }
+]
