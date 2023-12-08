@@ -7,10 +7,12 @@ router.post('/login', async(req, res) => {
   const user_data = req.body; // {} --> objeto vacio pero existe!!!
   const dataVerify=Object.values(user_data) // [] --> [datos,datos,datos]
   try {
-    const [rows] = await db.promise().query('SELECT * FROM teacher_app.user'); //verificar que este aqui mismo
-      const token = jwt.sign({ user_data }, 'secreto', { expiresIn: '1h' }); //lo que envian desde el front, la llave secreta y el tiempo de expiracion
-      const check_username_value=rows.filter((e)=> e.username === dataVerify[0]) //Crea un array
-    if (check_username_value.length > 0 ) { // si es igual o existe en la base de datos ingresa
+    const resultado = await db.promise().query('SELECT * FROM teacher_app.user WHERE username = ?', [user_data.username]);
+    const rows = resultado[0];
+    const token = jwt.sign({ user_data }, 'secreto', { expiresIn: '1h' });
+    const check_username_value = rows.filter(row => row.username === dataVerify[0] && row.password === dataVerify[1]);
+    
+    if (check_username_value.length > 0 ) { 
         res.status(200).json({ message:token });
         console.log('Ingreso exitoso')
       } else {
