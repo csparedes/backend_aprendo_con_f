@@ -1,0 +1,26 @@
+### Update Review & Rating
+PUT http://localhost:3001/api/enrollments/enrollmentId/1
+Content-Type: application/json
+
+{
+  "rating": 4,
+  "review": "One of the best installations I have ever seen."
+}
+
+
+
+###
+GET http://localhost:3001/api/users
+
+####
+GET http://localhost:3001/api/pages/profesor/4
+
+###
+GET http://localhost:3001/api/users/profesor/4
+
+
+###
+GET http://localhost:3001/api/estudiante/14
+
+###
+GET http://localhost:3001/api/users/student/14

@@ -19,7 +19,7 @@ const sqlDataStudentsByArea = 'SELECT enr.id,enr.student_id,usr.name,usr.country
     'JOIN teacher_app.User usr ON enr.teacher_id = usr.id '+
     'JOIN teacher_app.Knowledge_Area ka ON enr.teacher_id = ka.teacher_id ';   
     
-const sqlDataStudentsById = 'SELECT usr.id,usr.name,usr.email,usr.country,usr.city,enka.area '+
+const sqlDataStudentsById = 'SELECT enst.id, usr.id,usr.name,usr.email,usr.country,usr.city,enka.area '+
     'FROM teacher_app.User usr '+
     'JOIN teacher_app.student_enrollment enst ON usr.id = enst.student_id '+
     'JOIN teacher_app.knowledge_area enka ON enst.teacher_id=enka.teacher_id ';     
@@ -53,7 +53,7 @@ const sqlAllDataEstudiante= 'SELECT usr.id,usr.name,usr.email,usr.country,usr.ci
     'WHERE usr.role = ? AND usr.status = ? '+
     'GROUP BY usr.id, usr.name, usr.email, usr.country, usr.city ';
 
-const sqlAllDataEstudianteById= 'SELECT usr.id,usr.name,usr.email,usr.country,usr.city,usr.status,GROUP_CONCAT(enka.area SEPARATOR  \',\') AS areas '+
+const sqlAllDataEstudianteById= 'SELECT enst.id, usr.id,usr.name,usr.email,usr.country,usr.city,usr.status,GROUP_CONCAT(enka.area SEPARATOR  \',\') AS areas '+
     'FROM teacher_app.User usr '+
     'JOIN teacher_app.student_enrollment enst ON usr.id = enst.student_id '+
     'JOIN teacher_app.knowledge_area enka ON enst.teacher_id=enka.teacher_id '+
