@@ -42,27 +42,7 @@ const getProfessorActiveById = async (req, res) => {
     }
 }
 
-const getDataProfessorByArea = async (req, res) => {
-    try {
-        const { userId } = req.params;
-        const [result] = await UserModel.selectDataProfessorByArea(userId);
-        
-        res.json(result);
-    } catch (error) {
-        res.json({ fatal: error.message });
-    }
-}
 
-const getDataStudentsByProfesor = async (req, res) => {
-    try {
-        const { userId } = req.params;
-        const [result] = await UserModel.selectDataStudentsByProfesor(userId);
-        
-        res.json(result);
-    } catch (error) {
-        res.json({ fatal: error.message });
-    }
-}
 
 const getDataStudentsByArea = async (req, res) => {
     try {
@@ -86,16 +66,7 @@ const getDataStudentsById = async (req, res) => {
     }
 }
 
-const getDataUserStatus = async (req, res) => {
-    try {
-        const { status } = req.params;
-        const [result] = await UserModel.selectDataUserStatus(status);
-        
-        res.json(result);
-    } catch (error) {
-        res.json({ fatal: error.message });
-    }
-}
+
 
 const getAllDataProfesores = async (req, res) => {
     try {
@@ -231,18 +202,84 @@ const updateUserEstadoById = async (req, res) => {
 
 const insertKnowledgeForProfesor = async (req, res) => {
     try {
-        const [user] = await UserModel.createUser();        
-        const [result] = await UserModel.selectAllProfesorByStatusAndId(user.status, user.id)        
+        /*const [result] = await UserModel.insertUser(req.body);
+        const [user] = await UserModel.selectUserById(result.insertId)*/
+        const [areas] = splitStr(req.body.knowledgeAreas);
+        const id = req.body.id;
+        areas.forEach(element => {
+            const [knowledge] = KnowledgeModel.insertKnowledgeArea(id, element);
+            res.json(knowledge);
+        });
+                
+        //const [result] = await UserModel.selectAllProfesorByStatusAndId(user.status, user.id)        
 
     } catch (error) {
         res.json({ fatal: error.message });
     }
 }
 
+const insertAreas = (req, res) =>{
+    try {
+        createUser();
+        insertKnowledgeForProfesor();
+        const resultado = {
+            respuesta: true,
+            mensaje: 'Usuario y área insertado con éxito'            
+        }
+        res.json(resultado);
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+}
+
+
+
+function splitStr(str) {
+    // Function to split string
+    let string = str.split(",");    
+}
 
 const deleteUser = (req, res) => {
     res.send('Borra usuario');
 }
 
-module.exports = { getAllUsers, createUser, updateUser, deleteUser, getUsersByRol, getProfessorActive, getProfessorActiveById, getDataProfessorByArea, getDataStudentsByProfesor, getDataStudentsByArea, getDataStudentsById, getDataUserStatus,
-    getAllDataProfesores, getAllDataEstudiante, getDatosByRol, getDatosById, updateUserEstadoById, getAllDataProfesoresById, getAllDataEstudianteById, getAllProfesor, getAllEstudiante }
+/*module.exports = { getAllUsers, createUser, updateUser, deleteUser, getUsersByRol, getProfessorActive, getProfessorActiveById, getDataProfessorByArea, getDataStudentsByProfesor, getDataStudentsByArea, getDataStudentsById, getDataUserStatus,
+    getAllDataProfesores, getAllDataEstudiante, getDatosByRol, getDatosById, updateUserEstadoById, getAllDataProfesoresById, getAllDataEstudianteById, getAllProfesor, getAllEstudiante, insertAreas }*/
+
+    module.exports = { getAllUsers, createUser, updateUser, deleteUser, getUsersByRol, getProfessorActive, getProfessorActiveById, getDataStudentsByArea, getDataStudentsById,
+        getAllDataProfesores, getAllDataEstudiante, getDatosByRol, getDatosById, updateUserEstadoById, getAllDataProfesoresById, getAllDataEstudianteById, getAllProfesor, getAllEstudiante, insertAreas }    
+
+
+/*const getDataProfessorByArea = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const [result] = await UserModel.selectDataProfessorByArea(userId);
+        
+        res.json(result);
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+}*/
+
+
+/*const getDataStudentsByProfesor = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const [result] = await UserModel.selectDataStudentsByProfesor(userId);
+        
+        res.json(result);
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+}*/
+
+/*const getDataUserStatus = async (req, res) => {
+    try {
+        const { status } = req.params;
+        const [result] = await UserModel.selectDataUserStatus(status);
+        
+        res.json(result);
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+}*/

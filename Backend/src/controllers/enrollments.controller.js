@@ -10,7 +10,7 @@ const getAllEnrollmentStudent = async (req, res) => {
     }
 }
 
-const getAverageRatingById = async (req, res) => {
+/*const getAverageRatingById = async (req, res) => {
     try {
         const { userId } = req.params;
         const [result] = await enrollmentModel.selectAverageRatingById(userId);
@@ -29,7 +29,7 @@ const getAverageRating = async (req, res) => {
     } catch (error) {
         res.json({ fatal: error.message });
     }
-}
+}*/
 
 const createEnrollmentStudent = async (req, res) => {
     try {
@@ -43,4 +43,4 @@ const createEnrollmentStudent = async (req, res) => {
 
 }
 
-module.exports = {getAllEnrollmentStudent,getAverageRatingById,getAverageRating,createEnrollmentStudent}
+module.exports = {getAllEnrollmentStudent,createEnrollmentStudent}

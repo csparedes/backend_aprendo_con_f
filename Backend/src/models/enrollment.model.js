@@ -4,13 +4,13 @@ const selectEnrollmentStudent = () => {
 }
 
 /*Get Promedio rating por id*/
-const selectAverageRatingById= (teacherId) => {
+/*const selectAverageRatingById= (teacherId) => {
     return db.query('SELECT se.teacher_id, u.name, avg(se.rating) FROM teacher_app.student_enrollment se join teacher_app.User u on se.teacher_id = u.id where se.teacher_id =?', [teacherId]);
 }
 
 const selectAverageRating= () => {
     return db.query('SELECT se.teacher_id, u.name, avg(se.rating) FROM teacher_app.student_enrollment se join teacher_app.User u on se.teacher_id = u.id group by se.teacher_id');
-}
+}*/
 
 
 const insertEnrollmentStudent = ({rating,review,student_id,teacher_id,enrollment_date,active}) =>{
@@ -24,4 +24,4 @@ const selectEnrollmentStudentById = (id) => {
 }
 
 
-module.exports = {selectEnrollmentStudent,selectAverageRatingById, selectAverageRating,insertEnrollmentStudent, selectEnrollmentStudentById}
+module.exports = {selectEnrollmentStudent, insertEnrollmentStudent, selectEnrollmentStudentById}

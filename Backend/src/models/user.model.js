@@ -1,31 +1,3 @@
-const sqlDataProfessorActive = 'SELECT usr.id, usr.name, usr.email, usr.country, usr.city, usr.imageUrl, usr.hourly_rate, ka.teacher_id, ka.area,usr.phone, usr.description,usr.experience '+
-    'FROM teacher_app.User usr '+
-    'JOIN teacher_app.knowledge_area ka ON usr.id = ka.teacher_id '+
-    'WHERE usr.role = ? '+
-    'AND usr.status=?' ;
-
-const sqlDataProfessorByArea = 'SELECT usr.id, usr.name, ka.teacher_id, ka.area FROM teacher_app.User usr ' +
-    'JOIN teacher_app.Knowledge_area ka ON usr.id = ka.teacher_id '+
-    'WHERE usr.role = ? '+
-    'AND usr.status= ? ';
-
-const sqlDataStudentsByProfesor = 'SELECT enr.id,enr.student_id,usr.name,ka.teacher_id,ka.category,ka.area,usr.email,enr.enrollment_date '+
-    'FROM teacher_app.student_enrollment enr '+
-    'JOIN teacher_app.User usr ON enr.student_id = usr.id '+
-    'JOIN teacher_app.Knowledge_Area ka ON enr.teacher_id = ka.teacher_id ' ;
-
-const sqlDataStudentsByArea = 'SELECT enr.id,enr.student_id,usr.name,usr.country,usr.city,ka.category,ka.area,usr.email,enr.rating,enr.enrollment_date '+
-    'FROM teacher_app.student_enrollment enr '+
-    'JOIN teacher_app.User usr ON enr.teacher_id = usr.id '+
-    'JOIN teacher_app.Knowledge_Area ka ON enr.teacher_id = ka.teacher_id ';   
-    
-const sqlDataStudentsById = 'SELECT usr.id,usr.name,usr.email,usr.country,usr.city,enka.area '+
-    'FROM teacher_app.User usr '+
-    'JOIN teacher_app.student_enrollment enst ON usr.id = enst.student_id '+
-    'JOIN teacher_app.knowledge_area enka ON enst.teacher_id=enka.teacher_id ';     
-
-const sqlDataUserStatus= 'SELECT * FROM teacher_app.User ';        
-
 const sqlAllDataProfesor= 'SELECT usr.id,usr.name,usr.email,usr.country,usr.city,usr.imageUrl,usr.hourly_rate,usr.role,usr.experience,usr.description,ka.teacher_id,GROUP_CONCAT(ka.area SEPARATOR \',\') AS areas,FLOOR(ROUND(subquery.rating,2)) AS rating '+
 'FROM teacher_app.User usr LEFT JOIN teacher_app.Knowledge_area ka ON usr.id = ka.teacher_id '+
 'LEFT JOIN ( '+
@@ -79,6 +51,8 @@ const sqlEstudiante= 'SELECT usr.id,usr.name,usr.email,usr.country,usr.city,usr.
     'WHERE usr.role = ? '+
     'GROUP BY usr.id, usr.name, usr.email, usr.country, usr.city ';
 
+
+
 /*Get All Registered Users*/
 const selectAllUser = () => {
     return db.query('select * from teacher_app.user');
@@ -105,30 +79,17 @@ const selectProfessorActiveById= (userId) => {
     return db.query(sqlDataProfessorActive + 'AND usr.id=?', ['profesor' , 'activo', userId]);
 }
 
-/*Get  Professor By Area */
-const selectDataProfessorByArea= (userId) => {
-    return db.query(sqlDataProfessorByArea + 'AND usr.id=?', ['profesor' , 'activo', userId]);
-}
 
-/*Get Student by  Professor*/
-const selectDataStudentsByProfesor= (teacherId) => {
-    return db.query(sqlDataStudentsByProfesor + 'WHERE enr.teacher_id = ? ORDER BY enr.teacher_id', [teacherId]);
-}
 
-/*Get Student by Area*/
-const selectDataStudentsByArea= (studenId) => {
-    return db.query(sqlDataStudentsByArea + 'WHERE enr.student_id = ?', [studenId]);
-}
+
+
 
 /*Get Student by Id*/
 const selectDataStudentsById= (studenId) => {
     return db.query(sqlDataStudentsById + 'WHERE usr.role = ? AND enst.student_id= ?', ['estudiante', studenId]);
 }
 
-/*Get User Administrator*/
-const selectDataUserStatus= (status) => {
-    return db.query(sqlDataUserStatus + 'WHERE status=?', [status]);
-}
+
 
 /*Get All Profesores activos*/
 const selectAllProfesorByStatus = (status) => {
@@ -190,5 +151,48 @@ const deleteUser = (userId) =>{
     return db.query('DELETE FROM teacher_app.user WHERE id = ?', [userId]);
 }
 
-module.exports = {selectAllUser, selectUserByRol, insertUser, selectProfessorActive,selectProfessorActiveById,selectDataProfessorByArea, selectDataStudentsByProfesor, selectDataStudentsByArea, selectDataStudentsById, selectDataUserStatus, selectUserById, 
-    selectAllProfesorByStatus, selectAllDataEstudiante, selectDatosByRol, updateUserById, updateEstadoById, selectAllProfesorByStatusAndId, selectAllDataEstudianteById, selectAllProfesor, selectAllEstudiante}
+/*module.exports = {selectAllUser, selectUserByRol, insertUser, selectProfessorActive,selectProfessorActiveById,selectDataProfessorByArea, selectDataStudentsByProfesor, selectDataStudentsByArea, selectDataStudentsById, selectDataUserStatus, selectUserById, 
+    selectAllProfesorByStatus, selectAllDataEstudiante, selectDatosByRol, updateUserById, updateEstadoById, selectAllProfesorByStatusAndId, selectAllDataEstudianteById, selectAllProfesor, selectAllEstudiante}*/
+
+module.exports = {selectAllUser, selectUserByRol, insertUser, selectProfessorActive,selectProfessorActiveById,selectDataStudentsById, selectUserById, 
+        selectAllProfesorByStatus, selectAllDataEstudiante, selectDatosByRol, updateUserById, updateEstadoById, selectAllProfesorByStatusAndId, selectAllDataEstudianteById, selectAllProfesor, selectAllEstudiante}
+    
+
+/*const sqlDataProfessorByArea = 'SELECT usr.id, usr.name, ka.teacher_id, ka.area FROM teacher_app.User usr ' +
+    'JOIN teacher_app.Knowledge_area ka ON usr.id = ka.teacher_id '+
+    'WHERE usr.role = ? '+
+    'AND usr.status= ? ';*/
+
+/*Get  Professor By Area */
+/*const selectDataProfessorByArea= (userId) => {
+    return db.query(sqlDataProfessorByArea + 'AND usr.id=?', ['profesor' , 'activo', userId]);
+}*/    
+
+/*const sqlDataStudentsByProfesor = 'SELECT enr.id,enr.student_id,usr.name,ka.teacher_id,ka.category,ka.area,usr.email,enr.enrollment_date '+
+    'FROM teacher_app.student_enrollment enr '+
+    'JOIN teacher_app.User usr ON enr.student_id = usr.id '+
+    'JOIN teacher_app.Knowledge_Area ka ON enr.teacher_id = ka.teacher_id ' ;*/
+
+/*Get Student by  Professor*/
+/*const selectDataStudentsByProfesor= (teacherId) => {
+    return db.query(sqlDataStudentsByProfesor + 'WHERE enr.teacher_id = ? ORDER BY enr.teacher_id', [teacherId]);
+}*/   
+
+/*const sqlDataStudentsByArea = 'SELECT enr.id,enr.student_id,usr.name,usr.country,usr.city,ka.category,ka.area,usr.email,enr.rating,enr.enrollment_date '+
+    'FROM teacher_app.student_enrollment enr '+
+    'JOIN teacher_app.User usr ON enr.teacher_id = usr.id '+
+    'JOIN teacher_app.Knowledge_Area ka ON enr.teacher_id = ka.teacher_id ';   */
+
+
+/*Get Student by Area*/
+/*const selectDataStudentsByArea= (studenId) => {
+    return db.query(sqlDataStudentsByArea + 'WHERE enr.student_id = ?', [studenId]);
+} */   
+
+/*const sqlDataUserStatus= 'SELECT * FROM teacher_app.User ';        */
+
+/*Get User Administrator*/
+/*const selectDataUserStatus= (status) => {
+    return db.query(sqlDataUserStatus + 'WHERE status=?', [status]);
+}*/
+        
