@@ -8,7 +8,7 @@ const pool = mysql.createPool({
     // Obtiene el usuario de la base de datos desde las variables de entorno    
     user: "root",
     // Obtiene la contraseña de la base de datos desde las variables de entorno
-    password: "root",
+    password: "Avatarjunior1",
     // Obtiene el puerto de la base de datos desde las variables de entorno
     port: process.env.DB_PORT,
     // Obtiene el nombre de la base de datos desde las variables de entorno
