@@ -15,7 +15,6 @@ const checkToken = async(req, res, next) => {
     let payload;
     try {
         payload = jsonwebtoken.verify(token, process.env.SECRET_KEY);
-        console.log(payload);
     } catch (error) {
         return res.status(403).json ({
             fatal: error.message
@@ -23,13 +22,9 @@ const checkToken = async(req, res, next) => {
     }
 
     // Recuperar el usuario que realiza la petición
-    try {
         const user = await UserModel.selectUserById(payload.id);
-        console.log('ususario',user);
-        
-    } catch (error) {
-        
-    }
+        req.user = user[0][0];
+
     next();
 }
 
