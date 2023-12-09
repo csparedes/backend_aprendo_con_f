@@ -1,6 +1,7 @@
 const jsonwebtoken = require('jsonwebtoken');
+const UserModel = require('../models/user.model');
 
-const checkToken = (req, res, next) => {
+const checkToken = async(req, res, next) => {
     const token = req.headers['authorization']
     // Comprobar si el token viene en cabecera
     if (!token) {
@@ -11,8 +12,9 @@ const checkToken = (req, res, next) => {
         });
     }
     // Comprobar si el token es valido
+    let payload;
     try {
-        const payload = jsonwebtoken.verify(token, process.env.SECRET_KEY);
+        payload = jsonwebtoken.verify(token, process.env.SECRET_KEY);
         console.log(payload);
     } catch (error) {
         return res.status(403).json ({
@@ -21,7 +23,13 @@ const checkToken = (req, res, next) => {
     }
 
     // Recuperar el usuario que realiza la petición
-
+    try {
+        const user = await UserModel.selectUserById(payload.id);
+        console.log('ususario',user);
+        
+    } catch (error) {
+        
+    }
     next();
 }
 

@@ -7,17 +7,16 @@ const UserModel = require('../models/user.model');
 // Ruta para iniciar sesión (POST)
 router.post('/login', async (req, res) => {  
 const user_data = req.body; // {} --> objeto vacio pero existe!!!
-  console.log(user_data); 
+  //console.log(user_data); 
   try {
-      console.log('Entra al servicio');
      // si es igual o existe en la base de datos ingresa
     const resultado = await db.promise().query('SELECT * FROM teacher_app.user WHERE email = ?', [user_data.email]);
     //console.log(resultado);
     const rows = resultado[0];
     const password = user_data.password;
     const payload = {
-      user: rows,
-      expiresIn: '1h' 
+      id: rows[0].id,
+      role: rows[0].role
     }
     const token = jwt.sign(payload, process.env.SECRET_KEY);
 
@@ -45,7 +44,6 @@ const user_data = req.body; // {} --> objeto vacio pero existe!!!
                     resultado: token
             }); 
   } catch (error) {
-    console.log('Entra al servicio');
     res.status(401).send({err:error.message})
   }
   

@@ -4,6 +4,7 @@ const UserController = require('../../controllers/users.controller');
 const checkToken = require('../../middlewares/auth.middleware');
 
 router.get('/', UserController.getAllUsers);//Devuelve todos los usuarios
+router.get('/data/:userId', UserController.getDatosById);//Devuelve todos los usuarios
 router.get('/profesor', UserController.getProfessorActive);//Devuelve todos los profesores con estado activo
 router.get('/profesor/:userId', UserController.getProfessorActiveById); //Devuelve todos los profesores con estado activo por id
 router.get('/estudiante/:userId', UserController.getDataStudentsById); //Obtiene los datos del estudiante por id
