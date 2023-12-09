@@ -16,6 +16,7 @@ router.post('/login', async (req, res) => {
     const rows = resultado[0];
     const password = user_data.password;
     const token = jwt.sign({ user_data }, 'secreto', { expiresIn: '1h' });
+
     //Revisión de email en base de datos;
     const [result] = await UserModel.verificaCorreo( user_data.email, 'El correo existe', 'El correo no existe');
     const valores = Object.values(result[0]); //El correo existe o no existe
@@ -26,7 +27,13 @@ router.post('/login', async (req, res) => {
                 resultado: null
         });
       }  
+ //     const prueba = bcrypt.hashSync(password, 10);
+ //     console.log(prueba);
+
+      
     const equals = bcrypt.compareSync(password, rows[0].password)
+
+    console.log(equals);
     if (!equals) {
             return res.json({
                     respuesta: false,
@@ -37,7 +44,7 @@ router.post('/login', async (req, res) => {
         res.json({
                     respuesta: true,
                     mensaje: 'Login corecto',
-                    resultado: token
+                    token: token
             }); 
   } catch (error) {
     res.status(401).send({err:error.message})

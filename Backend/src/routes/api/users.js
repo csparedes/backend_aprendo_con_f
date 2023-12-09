@@ -6,7 +6,7 @@ router.get('/', UserController.getAllUsers);//Devuelve todos los usuarios
 router.get('/profesor', UserController.getProfessorActive);//Devuelve todos los profesores con estado activo
 router.get('/profesor/:userId', UserController.getProfessorActiveById); //Devuelve todos los profesores con estado activo por id
 router.get('/profesor/area/:userId', UserController.getDataProfessorByArea);
-router.get('/student/profesor/:userId', UserController.getDataStudentsByProfesor);
+router.get('/student/profesor/:userId', UserController.getDataStudentsByIdProfesor);
 router.get('/student/area/:userId', UserController.getDataStudentsByArea);
 router.get('/student/:userId', UserController.getDataStudentsById); //Obtiene los datos del estudiante por id
 router.get('/:status', UserController.getDataUserStatus); //Obtiene todos los datos por status
@@ -19,10 +19,15 @@ router.get('/data/:userId', UserController.getDatosById); //Obtiene todos datos 
 router.get('/prof/allProfesor', UserController.getAllProfesor);//Devuelve todos los profesores
 router.get('/est/allEstudiante', UserController.getAllEstudiante);//Devuelve todos los estudiante
 
+router.get('/profesor/estudiantes/:userId', UserController.getDataStudentsByIdProfesor);//Devuelve los estudiantes de acuerdo al id del profesor
+router.get('/student/profesores/:userId', UserController.getDataProfesoresByIdStudent);//Devuelve los estudiantes de acuerdo al id del profesor
+
 router.post('/', UserController.createUser); //insertar datos usuario
 router.put('/:userId', UserController.updateUser); //actualizar datos usuario
 router.put('/estado/:userId', UserController.updateUserEstadoById); //actualizar el estado del usuario por id
 router.delete('/:userId', UserController.deleteUser); 
+
+
 
 
 module.exports = router;
