@@ -13,9 +13,7 @@ const getAllEnrollmentStudent = async (req, res) => {
 //
 const updateReviewRating = async (req, res) => {
     const { enrollmentId } = req.params;
-    console.log(enrollmentId);
     const { rating, review } = req.body;
-    console.log(rating, review);
     try {
         const [result] = await enrollmentModel.updateFeedbackRating(enrollmentId, { rating, review });
         console.log(result);
