@@ -1,6 +1,7 @@
 const db=require('../config/db')
 const UserModel = require('../models/user.model');
 const KnowledgeModel = require('../models/knowledge_area.model');
+const bcrypt = require('bcryptjs');
 
 const getAllUsers = async (req, res) => {
     try {
@@ -243,11 +244,39 @@ const deleteUser = (req, res) => {
     res.send('Borra usuario');
 }
 
+//REGISTRO DE USUSARIOS
+const register = async(req, res) => {
+    try {
+        // Encriptamos el password
+        req.body.password = bcrypt.hashSync(req.body.password, 8);
+        console.log(req.body);
+        const [result] = await UserModel.insertUser(req.body);
+        const [user] = await UserModel.selectUserById(result.insertId)
+        const resultado = {
+            respuesta: true,
+            mensaje: 'Usuario insertado con éxito',
+            resultado: user
+        }
+        res.json(resultado);
+
+    } catch (error) {
+        let mensaje = "";
+        if (error.code == 'ER_DUP_ENTRY') {
+            mensaje = 'El email ingresado ya se encuentra registrado'
+        }
+        res.json({
+            respuesta: false,
+            fatal: error.message,
+            mensaje: mensaje
+        });
+    }
+}
+
 /*module.exports = { getAllUsers, createUser, updateUser, deleteUser, getUsersByRol, getProfessorActive, getProfessorActiveById, getDataProfessorByArea, getDataStudentsByProfesor, getDataStudentsByArea, getDataStudentsById, getDataUserStatus,
     getAllDataProfesores, getAllDataEstudiante, getDatosByRol, getDatosById, updateUserEstadoById, getAllDataProfesoresById, getAllDataEstudianteById, getAllProfesor, getAllEstudiante, insertAreas }*/
 
     module.exports = { getAllUsers, createUser, updateUser, deleteUser, getUsersByRol, getProfessorActive, getProfessorActiveById, getDataStudentsByArea, getDataStudentsById,
-        getAllDataProfesores, getAllDataEstudiante, getDatosByRol, getDatosById, updateUserEstadoById, getAllDataProfesoresById, getAllDataEstudianteById, getAllProfesor, getAllEstudiante, insertAreas }    
+        getAllDataProfesores, getAllDataEstudiante, getDatosByRol, getDatosById, updateUserEstadoById, getAllDataProfesoresById, getAllDataEstudianteById, getAllProfesor, getAllEstudiante, insertAreas,register }    
 
 
 /*const getDataProfessorByArea = async (req, res) => {

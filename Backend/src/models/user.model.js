@@ -151,11 +151,19 @@ const deleteUser = (userId) =>{
     return db.query('DELETE FROM teacher_app.user WHERE id = ?', [userId]);
 }
 
+//Login
+const verificaCorreo = (correo, mc,mi) => {
+    return db.query('SELECT CASE WHEN EXISTS(SELECT * FROM teacher_app.user WHERE email = ?)THEN ? ELSE ? END;', [correo, mc, mi]);
+}
+const userByEmail = (correo) => {
+    return db.query('SELECT * FROM teacher_app.user WHERE email = ?', [correo]);
+}
+
 /*module.exports = {selectAllUser, selectUserByRol, insertUser, selectProfessorActive,selectProfessorActiveById,selectDataProfessorByArea, selectDataStudentsByProfesor, selectDataStudentsByArea, selectDataStudentsById, selectDataUserStatus, selectUserById, 
     selectAllProfesorByStatus, selectAllDataEstudiante, selectDatosByRol, updateUserById, updateEstadoById, selectAllProfesorByStatusAndId, selectAllDataEstudianteById, selectAllProfesor, selectAllEstudiante}*/
 
 module.exports = {selectAllUser, selectUserByRol, insertUser, selectProfessorActive,selectProfessorActiveById,selectDataStudentsById, selectUserById, 
-        selectAllProfesorByStatus, selectAllDataEstudiante, selectDatosByRol, updateUserById, updateEstadoById, selectAllProfesorByStatusAndId, selectAllDataEstudianteById, selectAllProfesor, selectAllEstudiante}
+        selectAllProfesorByStatus, selectAllDataEstudiante, selectDatosByRol, updateUserById, updateEstadoById, selectAllProfesorByStatusAndId, selectAllDataEstudianteById, selectAllProfesor, selectAllEstudiante,verificaCorreo,userByEmail}
     
 
 /*const sqlDataProfessorByArea = 'SELECT usr.id, usr.name, ka.teacher_id, ka.area FROM teacher_app.User usr ' +

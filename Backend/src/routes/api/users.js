@@ -13,7 +13,8 @@ router.get('/estudiante/:status/:userId', UserController.getAllDataEstudianteByI
 router.get('/prof/allProfesor', UserController.getAllProfesor);//Devuelve todos los profesores todos los status
 router.get('/est/allEstudiante', UserController.getAllEstudiante);//Devuelve todos los estudiante todos los status
 router.post('/', UserController.createUser); //insertar datos usuario
-router.post('/area',UserController.insertAreas);
+router.post('/area', UserController.insertAreas);
+router.post('/register', UserController.register);//Registrar usuario
 router.put('/estado/:userId', UserController.updateUserEstadoById); //actualizar el estado del usuario por id
 
 
