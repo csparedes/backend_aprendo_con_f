@@ -13,8 +13,9 @@ const getAllKnowledge = async (req, res) => {
 const createKnowledge = async (req, res) => {
     try {
         const [result] = await KnowledgeModel.insertKnowledgeArea(req.body);
+        console.log(result);
         const [knowledge] = await KnowledgeModel.selectKnowledgeAreaById(result.insertId)
-        res.json(knowledge);
+        res.json(knowledge[0]);
 
     } catch (error) {
         res.json({ fatal: error.message });

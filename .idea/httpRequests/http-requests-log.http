@@ -1,3 +1,123 @@
+POST http://localhost:3001/api/knowledge
+Content-Type: application/json
+Content-Length: 148
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "teacher_id": 8,
+  "category": "Oficios",
+  "description": "Limpieza de boiler",
+  "level": "Avanzado",
+  "area": "Plomeria",
+  "active": true
+}
+
+<> 2023-12-09T034959.200.json
+
+###
+
+POST http://localhost:3001/api/knowledge
+Content-Type: application/json
+Content-Length: 168
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+    {
+    "teacher_Id": 8,
+    "category": "Oficios",
+    "description": "Limpieza de boiler",
+    "level": "Avanzado",
+    "area": "Plomeria",
+    "active": true
+    }
+
+<> 2023-12-09T034343.200.json
+
+###
+
+POST http://localhost:3001/api/knowledge
+Content-Type: application/json
+Content-Length: 187
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+    {
+    "teacher_Id": 8,
+    "category": "Oficios",
+    "description": "Limpieza de boiler",
+    "level": "Avanzado",
+    "area": ["Plomeria", "Instalaciones"],
+    "active": true
+    }
+
+<> 2023-12-09T034114.200.json
+
+###
+
+POST http://localhost:3001/api/knowledge
+Content-Type: application/json
+Content-Length: 187
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+    {
+    "teacher_Id": 8,
+    "category": "Oficios",
+    "description": "Limpieza de boiler",
+    "level": "Avanzado",
+    "area": ["Plomeria", "Instalaciones"],
+    "active": true
+    }
+
+<> 2023-12-09T033804.200.json
+
+###
+
+POST http://localhost:3001/api/knowledge
+Content-Type: application/json
+Content-Length: 187
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+    {
+    "teacher_Id": 8,
+    "category": "Oficios",
+    "description": "Limpieza de boiler",
+    "level": "Avanzado",
+    "area": ["Plomeria", "Instalaciones"],
+    "active": true
+    }
+
+<> 2023-12-09T033713.200.json
+
+###
+
+POST http://localhost:3001/api/knowledge
+Content-Type: application/json
+Content-Length: 187
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+    {
+    "teacher_Id": 8,
+    "category": "Oficios",
+    "description": "Limpieza de boiler",
+    "level": "Avanzado",
+    "area": ["Plomeria", "Instalaciones"],
+    "active": true
+    }
+
+<> 2023-12-09T033128.200.json
+
+###
+
 PUT http://localhost:3001/api/enrollments/1
 Content-Type: application/json
 Content-Length: 80

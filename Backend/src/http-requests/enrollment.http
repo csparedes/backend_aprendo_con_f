@@ -6,3 +6,16 @@ Content-Type: application/json
   "rating": 4,
   "review": "One of the best installations I have ever seen."
 }
+
+### Knowledge Areas
+POST http://localhost:3001/api/knowledge
+Content-Type: application/json
+
+{
+  "teacher_id": 8,
+  "category": "Oficios",
+  "description": "Limpieza de boiler",
+  "level": "Avanzado",
+  "area": "Plomeria",
+  "active": true
+}

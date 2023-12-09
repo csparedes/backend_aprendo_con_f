@@ -1,0 +1,9 @@
+{
+  "id": 26,
+  "category": "Oficios",
+  "description": "Limpieza de boiler",
+  "level": "Avanzado",
+  "teacher_id": 8,
+  "area": "Plomeria",
+  "active": 1
+}

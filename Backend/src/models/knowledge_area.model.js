@@ -4,8 +4,8 @@ const selectKnowledgeArea = () => {
 
 
 const insertKnowledgeArea = ({category,description,level,teacher_id,area,active}) =>{
-    return db.query('INSERT INTO teacher_app.knowledge_area(category,description,level,teacher_id,area,active) VALUES(?,?,?,?,?,1)', 
-    [category,description,level,teacher_id,area,active]);
+    return db.query('INSERT INTO teacher_app.knowledge_area(category, description, level, teacher_id, area, active) VALUES (?, ?, ?, ?, ?, ?)',
+        [category, description, level, teacher_id, area, active]);
 }
 
 const selectKnowledgeAreaById = (id) => {
