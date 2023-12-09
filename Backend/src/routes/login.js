@@ -12,10 +12,14 @@ const user_data = req.body; // {} --> objeto vacio pero existe!!!
       console.log('Entra al servicio');
      // si es igual o existe en la base de datos ingresa
     const resultado = await db.promise().query('SELECT * FROM teacher_app.user WHERE email = ?', [user_data.email]);
-    console.log(resultado);
+    //console.log(resultado);
     const rows = resultado[0];
     const password = user_data.password;
-    const token = jwt.sign({ user_data }, 'secreto', { expiresIn: '1h' });
+    const payload = {
+      user: rows,
+      expiresIn: '1h' 
+    }
+    const token = jwt.sign(payload, process.env.SECRET_KEY);
 
    //Revisión de email en base de datos;
     const [result] = await UserModel.verificaCorreo( user_data.email, 'El correo existe', 'El correo no existe');

@@ -28,15 +28,15 @@ app.use('/api',require('../routes/api'));
 app.use('/user',require('../routes/login.js'))
 
 
-app.post('/token',(req,res)=>{
-  const {id:sub,name}={id:"serial",name:'luis'}
-  const token=jwt.sign({
-    sub,
-    name,
-    exp:Date.now() + 60 * 10000 // 10 min de duracion
-  }, secretKey)
-  res.send({token})
-})
+// app.post('/token',(req,res)=>{
+//   const {id:sub,name}={id:"serial",name:'luis'}
+//   const token=jwt.sign({
+//     sub,
+//     name,
+//     exp:Date.now() + 60 * 10000 // 10 min de duracion
+//   }, secretKey)
+//   res.send({token})
+// })
 
 
 app.get('/public',(req,res)=>{

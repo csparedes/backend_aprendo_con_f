@@ -9,7 +9,7 @@ const pool = mysql.createPool({
     // Obtiene el usuario de la base de datos desde las variables de entorno    
     user: process.env.DB_USER,
     // Obtiene la contraseña de la base de datos desde las variables de entorno
-    password: 'Nikopanchodomi110@',
+    password: 'Avatarjunior1',
     // Obtiene el puerto de la base de datos desde las variables de entorno
     port: process.env.DB_PORT,
     // Obtiene el nombre de la base de datos desde las variables de entorno
@@ -21,4 +21,6 @@ const pool = mysql.createPool({
 
 // Asigna el pool de conexiones con promesas a una variable global llamada 'db'
 global.db = pool.promise();
+
+module.exports=pool
 

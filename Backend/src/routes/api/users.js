@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 const UserController = require('../../controllers/users.controller');
+const checkToken = require('../../middlewares/auth.middleware');
 
 router.get('/', UserController.getAllUsers);//Devuelve todos los usuarios
 router.get('/profesor', UserController.getProfessorActive);//Devuelve todos los profesores con estado activo
@@ -10,8 +11,8 @@ router.get('/profesores/:status', UserController.getAllDataProfesores);  //Obtie
 router.get('/profesores/:status/:userId', UserController.getAllDataProfesoresById);  //Obtiene todos los datos del profesor incluido rating y area por status y Id
 router.get('/estudiante/:status', UserController.getAllDataEstudiante); //Obtiene todos los datos del estudiante incluido  area
 router.get('/estudiante/:status/:userId', UserController.getAllDataEstudianteById); //Obtiene todos los datos del estudiante incluido  area por status y Id
-router.get('/prof/allProfesor', UserController.getAllProfesor);//Devuelve todos los profesores todos los status
-router.get('/est/allEstudiante', UserController.getAllEstudiante);//Devuelve todos los estudiante todos los status
+router.get('/prof/allProfesor',checkToken, UserController.getAllProfesor);//Devuelve todos los profesores todos los status
+router.get('/est/allEstudiante',checkToken, UserController.getAllEstudiante);//Devuelve todos los estudiante todos los status
 router.post('/', UserController.createUser); //insertar datos usuario
 router.post('/area', UserController.insertAreas);
 router.post('/register', UserController.register);//Registrar usuario
