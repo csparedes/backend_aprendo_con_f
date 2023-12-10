@@ -10,12 +10,8 @@ const user_data = req.body; // {} --> objeto vacio pero existe!!!
 
   console.log(user_data); 
   try {
-      console.log('Entra al servicio');
-     // si es igual o existe en la base de datos ingresa
+    // si es igual o existe en la base de datos ingresa
     const resultado = await global.db.query('SELECT * FROM teacher_app.user WHERE email = ?', [user_data.email]);
-    
-
-    console.log('hola:',resultado);
     const rows = resultado[0];
     const password = user_data.password;
     const token = jwt.sign({ user_data }, 'secreto', { expiresIn: '1h' });
