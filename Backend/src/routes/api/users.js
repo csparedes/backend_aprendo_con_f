@@ -18,6 +18,7 @@ router.post('/', UserController.createUser); //insertar datos usuario
 router.post('/area', UserController.insertAreas);
 router.post('/register', UserController.register);//Registrar usuario
 router.put('/estado/:userId', UserController.updateUserEstadoById); //actualizar el estado del usuario por id
+router.get('/datos/:role', UserController.getDatosByRol); //Obtiene todos datos por rol
 
 
 
@@ -25,7 +26,6 @@ router.put('/estado/:userId', UserController.updateUserEstadoById); //actualizar
 //router.get('/student/profesor/:userId', UserController.getDataStudentsByProfesor);
 //router.get('/student/area/:userId', UserController.getDataStudentsByArea);
 //router.get('/:status', UserController.getDataUserStatus); //Obtiene todos los datos por status
-//router.get('/datos/:role', UserController.getDatosByRol); //Obtiene todos datos por rol
 //router.get('/data/:userId', UserController.getDatosById); //Obtiene todos datos por id
 //router.put('/:userId', UserController.updateUser); //actualizar datos usuario
 //router.delete('/:userId', UserController.deleteUser); 

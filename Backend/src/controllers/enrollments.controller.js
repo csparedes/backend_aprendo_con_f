@@ -23,19 +23,19 @@ const updateReviewRating = async (req, res) => {
     }
 }
 
-module.exports = {getAllEnrollmentStudent,updateReviewRating}
 
-// const createEnrollmentStudent = async (req, res) => {
-//     try {
-//         const [result] = await enrollmentModel.insertEnrollmentStudent(req.body);
-//         const [user] = await enrollmentModel.selectEnrollmentStudentById(result.insertId)
-//         res.json(user);
-//
-//     } catch (error) {
-//         res.json({ fatal: error.message });
-//     }
-//
-// }
+const createEnrollmentStudent = async (req, res) => {
+    try {
+        const [result] = await enrollmentModel.insertEnrollmentStudent(req.body);
+        const [user] = await enrollmentModel.selectEnrollmentStudentById(result.insertId)
+        res.json(user);
+        
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+    
+}
+module.exports = {getAllEnrollmentStudent,updateReviewRating,createEnrollmentStudent}
 
 /*const getAverageRatingById = async (req, res) => {
     try {

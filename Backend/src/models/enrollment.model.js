@@ -9,6 +9,10 @@ const updateFeedbackRating = (enrollmentId, { rating, review }) => {
     [rating, review, enrollmentId]);
 }
 
+const insertEnrollmentStudent = ({rating,review,student_id,teacher_id,enrollment_date,active}) =>{
+    return db.query('INSERT INTO teacher_app.student_enrollment(rating,review,student_id,teacher_id,enrollment_date,active)VALUES(?,?,?,?,now(),1)',
+    [rating,review,student_id,teacher_id,enrollment_date,active]);
+}
 
 // /*Get All Student Enrollment by  ID*/
 // const selectEnrollmentStudentById = (id) => {
@@ -17,7 +21,7 @@ const updateFeedbackRating = (enrollmentId, { rating, review }) => {
 
 
 
-module.exports = {selectEnrollmentStudent, updateFeedbackRating}
+module.exports = {selectEnrollmentStudent, updateFeedbackRating, insertEnrollmentStudent}
 
 
 /*Get Promedio rating por id*/
@@ -29,8 +33,3 @@ const selectAverageRating= () => {
     return db.query('SELECT se.teacher_id, u.name, avg(se.rating) FROM teacher_app.student_enrollment se join teacher_app.User u on se.teacher_id = u.id group by se.teacher_id');
 }*/
 
-/*
-// const insertEnrollmentStudent = ({rating,review,student_id,teacher_id,enrollment_date,active}) =>{
-//     return db.query('INSERT INTO teacher_app.student_enrollment(rating,review,student_id,teacher_id,enrollment_date,active)VALUES(?,?,?,?,now(),1)',
-//     [rating,review,student_id,teacher_id,enrollment_date,active]);
-// }*/
