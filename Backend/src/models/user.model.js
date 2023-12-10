@@ -18,6 +18,17 @@ const sqlAllDataProfesorById= 'SELECT usr.id,usr.name,usr.email,usr.country,usr.
 'WHERE usr.role = ? AND usr.status = ? and usr.id = ? '+
 'GROUP BY usr.id, usr.name, usr.email, usr.country, usr.city, usr.imageUrl, usr.hourly_rate, ka.teacher_id, subquery.rating ';
 
+const sqlDataStudentsByIdProfesor = "SELECT usr.id, usr.name, usr.email, se.teacher_id, GROUP_CONCAT(ka.area SEPARATOR ', ') AS areas " +
+    "FROM teacher_app.User usr " +
+    "JOIN teacher_app.student_enrollment se ON usr.id = se.student_id " +
+    "JOIN teacher_app.knowledge_area ka ON se.teacher_id = ka.teacher_id";
+
+    const sqlDataProfesoresByIdStudent = 
+    "SELECT u.id, u.name, u.email, u.country, u.city, ka.area AS area_de_conocimiento " +
+    "FROM teacher_app.user u " +
+    "INNER JOIN teacher_app.student_enrollment se ON u.id = se.teacher_id " +
+    "INNER JOIN teacher_app.knowledge_area ka ON u.id = ka.teacher_id";
+
 const sqlAllDataEstudiante= 'SELECT usr.id,usr.name,usr.email,usr.country,usr.city,usr.status,GROUP_CONCAT(enka.area SEPARATOR  \',\') AS areas '+
     'FROM teacher_app.User usr '+
     'JOIN teacher_app.student_enrollment enst ON usr.id = enst.student_id '+
@@ -159,11 +170,24 @@ const userByEmail = (correo) => {
     return db.query('SELECT * FROM teacher_app.user WHERE email = ?', [correo]);
 }
 
+/*Get Students by Id Professor*/
+const selectDataStudentsByIdProfesor = (teacherId) => {
+    return db.query(sqlDataStudentsByIdProfesor + ' WHERE se.teacher_id = ? GROUP BY usr.id, se.teacher_id;', [teacherId]);
+}
+
+
+/*Get Profesores by Id Student*/
+const selectDataProfesoresByIdStudent = (studentId) => {
+    return db.query(sqlDataProfesoresByIdStudent + 
+    " WHERE se.student_id = ? AND se.active=1", [studentId]);
+}
+
+
 /*module.exports = {selectAllUser, selectUserByRol, insertUser, selectProfessorActive,selectProfessorActiveById,selectDataProfessorByArea, selectDataStudentsByProfesor, selectDataStudentsByArea, selectDataStudentsById, selectDataUserStatus, selectUserById, 
     selectAllProfesorByStatus, selectAllDataEstudiante, selectDatosByRol, updateUserById, updateEstadoById, selectAllProfesorByStatusAndId, selectAllDataEstudianteById, selectAllProfesor, selectAllEstudiante}*/
 
 module.exports = {selectAllUser, selectUserByRol, insertUser, selectProfessorActive,selectProfessorActiveById,selectDataStudentsById, selectUserById, 
-        selectAllProfesorByStatus, selectAllDataEstudiante, selectDatosByRol, updateUserById, updateEstadoById, selectAllProfesorByStatusAndId, selectAllDataEstudianteById, selectAllProfesor, selectAllEstudiante,verificaCorreo,userByEmail}
+        selectAllProfesorByStatus, selectAllDataEstudiante, selectDatosByRol, updateUserById, updateEstadoById, selectAllProfesorByStatusAndId, selectAllDataEstudianteById, selectAllProfesor, selectAllEstudiante,verificaCorreo,userByEmail, selectDataStudentsByIdProfesor, selectDataProfesoresByIdStudent}
     
 
 /*const sqlDataProfessorByArea = 'SELECT usr.id, usr.name, ka.teacher_id, ka.area FROM teacher_app.User usr ' +

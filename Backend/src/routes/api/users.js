@@ -17,7 +17,8 @@ router.post('/area', UserController.insertAreas);
 router.post('/register', UserController.register);//Registrar usuario
 router.put('/estado/:userId', UserController.updateUserEstadoById); //actualizar el estado del usuario por id
 
-
+router.get('/profesor/estudiantes/:userId', UserController.getDataStudentsByIdProfesor);//Devuelve los estudiantes de acuerdo al id del profesor
+router.get('/student/profesores/:userId', UserController.getDataProfesoresByIdStudent);//Devuelve los profesores de acuerdo al id del estudiante
 
 //router.get('/profesor/area/:userId', UserController.getDataProfessorByArea);
 //router.get('/student/profesor/:userId', UserController.getDataStudentsByProfesor);

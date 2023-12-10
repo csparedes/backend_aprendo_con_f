@@ -272,11 +272,34 @@ const register = async(req, res) => {
     }
 }
 
+const getDataStudentsByIdProfesor = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const [result] = await UserModel.selectDataStudentsByIdProfesor(userId);
+        res.json(result);
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+}
+
+const getDataProfesoresByIdStudent = async (req, res) => {
+    console.log('hola');
+    try {
+        const { userId } = req.params;
+        console.log(userId);
+        const [result] = await UserModel.selectDataProfesoresByIdStudent(userId);
+        console.log('hola');
+        res.json(result);
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+}
+
 /*module.exports = { getAllUsers, createUser, updateUser, deleteUser, getUsersByRol, getProfessorActive, getProfessorActiveById, getDataProfessorByArea, getDataStudentsByProfesor, getDataStudentsByArea, getDataStudentsById, getDataUserStatus,
     getAllDataProfesores, getAllDataEstudiante, getDatosByRol, getDatosById, updateUserEstadoById, getAllDataProfesoresById, getAllDataEstudianteById, getAllProfesor, getAllEstudiante, insertAreas }*/
 
     module.exports = { getAllUsers, createUser, updateUser, deleteUser, getUsersByRol, getProfessorActive, getProfessorActiveById, getDataStudentsByArea, getDataStudentsById,
-        getAllDataProfesores, getAllDataEstudiante, getDatosByRol, getDatosById, updateUserEstadoById, getAllDataProfesoresById, getAllDataEstudianteById, getAllProfesor, getAllEstudiante, insertAreas,register }    
+        getAllDataProfesores, getAllDataEstudiante, getDatosByRol, getDatosById, updateUserEstadoById, getAllDataProfesoresById, getAllDataEstudianteById, getAllProfesor, getAllEstudiante, insertAreas,register, getDataStudentsByIdProfesor, getDataProfesoresByIdStudent}    
 
 
 /*const getDataProfessorByArea = async (req, res) => {
