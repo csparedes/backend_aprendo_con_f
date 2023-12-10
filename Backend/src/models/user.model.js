@@ -24,7 +24,7 @@ const sqlDataStudentsByIdProfesor = "SELECT usr.id, usr.name, usr.email, se.teac
     "JOIN teacher_app.knowledge_area ka ON se.teacher_id = ka.teacher_id";
 
     const sqlDataProfesoresByIdStudent = 
-    "SELECT u.id, u.name, u.email, u.country, u.city, ka.area AS area_de_conocimiento " +
+    "SELECT u.id, u.name, u.email, u.country, u.city, GROUP_CONCAT(ka.area SEPARATOR ', ') AS areas_de_conocimiento " +
     "FROM teacher_app.user u " +
     "INNER JOIN teacher_app.student_enrollment se ON u.id = se.teacher_id " +
     "INNER JOIN teacher_app.knowledge_area ka ON u.id = ka.teacher_id";
@@ -179,7 +179,7 @@ const selectDataStudentsByIdProfesor = (teacherId) => {
 /*Get Profesores by Id Student*/
 const selectDataProfesoresByIdStudent = (studentId) => {
     return db.query(sqlDataProfesoresByIdStudent + 
-    " WHERE se.student_id = ? AND se.active=1", [studentId]);
+    " WHERE se.student_id = ? AND se.active=1 GROUP BY u.id, u.name, u.email, u.country, u.city;", [studentId]);
 }
 
 
