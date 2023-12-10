@@ -1,0 +1,8 @@
+### Update Review & Rating
+PUT http://localhost:3001/api/enrollments/1
+Content-Type: application/json
+
+{
+  "rating": 4,
+  "review": "One of the best installations I have ever seen."
+}
