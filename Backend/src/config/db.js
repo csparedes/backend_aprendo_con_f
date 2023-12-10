@@ -1,6 +1,7 @@
 // Importa el módulo 'mysql2' y lo asigna a la constante 'mysql'
 const mysql = require('mysql2/promise');
-require('dotenv').config({ path: '../../.env'});
+//require('dotenv').config({ path: '../../.env'});
+require('dotenv').config();
 
 // Crea un pool de conexiones utilizando los valores proporcionados
 const pool = mysql.createPool({

@@ -31,13 +31,16 @@ const user_data = req.body; // {} --> objeto vacio pero existe!!!
             return res.json({
                     respuesta: false,
                     mensaje: 'correo o password incorrectos',
-                    resultado: null
+                    resultado: null,
             });
         }   
         res.json({
                     respuesta: true,
                     mensaje: 'Login Correcto',
-                    resultado: token
+                    resultado: token,
+                    id: rows[0].id,
+                    rol: rows[0].role, 
+
             }); 
   } catch (error) {
     console.log('Entra al servicio');

@@ -1,7 +1,8 @@
 const app = require('../server/start'); // Ruta al archivo principal de la aplicación Express
 const http = require('http');
 
-require('dotenv').config({ path: '../../.env'});
+//require('dotenv').config({ path: '../../.env'});
+require('dotenv').config();
 
 function normalizePort(portVal) {  //Verifica que el valor de puerto sea un numero
     const port = parseInt(portVal, 10);
