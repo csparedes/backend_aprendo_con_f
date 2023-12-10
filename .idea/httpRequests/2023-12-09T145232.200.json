@@ -1,0 +1,11 @@
+[
+  {
+    "id": 30,
+    "category": "Programming",
+    "description": "Basic Programming",
+    "level": "Avanzado",
+    "teacher_id": 12,
+    "area": "Java, SQL",
+    "active": 1
+  }
+]

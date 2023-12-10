@@ -1,0 +1,11 @@
+[
+  {
+    "id": 28,
+    "category": "Oficios",
+    "description": "Limpieza de Albercas",
+    "level": "Avanzado",
+    "teacher_id": 12,
+    "area": "Trabajos en General",
+    "active": 1
+  }
+]

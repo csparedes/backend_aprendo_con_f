@@ -1,3 +1,4 @@
+Knowledge Area .js
 ### Update Review & Rating
 PUT http://localhost:3001/api/enrollments/1
 Content-Type: application/json
@@ -5,4 +6,17 @@ Content-Type: application/json
 {
   "rating": 4,
   "review": "One of the best installations I have ever seen."
+}
+
+### Knowledge Areas
+POST http://localhost:3001/api/knowledge/create
+Content-Type: application/json
+
+{
+  "teacher_id": 12,
+  "category": "Programming",
+  "description": "Basic Programming",
+  "level": "Avanzado",
+  "area": "Java, SQL",
+  "active": true
 }

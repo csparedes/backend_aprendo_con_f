@@ -1,3 +1,83 @@
+POST http://localhost:3001/api/knowledge/create
+Content-Type: application/json
+Content-Length: 153
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "teacher_id": 12,
+  "category": "Programming",
+  "description": "Basic Programming",
+  "level": "Avanzado",
+  "area": "Java, SQL",
+  "active": true
+}
+
+<> 2023-12-09T145232.200.json
+
+###
+
+POST http://localhost:3001/api/knowledge/create
+Content-Type: application/json
+Content-Length: 153
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "teacher_id": 12,
+  "category": "Programming",
+  "description": "Basic Programming",
+  "level": "Avanzado",
+  "area": "Java, SQL",
+  "active": true
+}
+
+<> 2023-12-09T145221.200.json
+
+###
+
+POST http://localhost:3001/api/knowledge
+Content-Type: application/json
+Content-Length: 162
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "teacher_id": 12,
+  "category": "Oficios",
+  "description": "Limpieza de Albercas",
+  "level": "Avanzado",
+  "area": "Trabajos en General",
+  "active": true
+}
+
+<> 2023-12-09T113827.200.json
+
+###
+
+POST http://localhost:3001/api/knowledge
+Content-Type: application/json
+Content-Length: 162
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "teacher_id": 12,
+  "category": "Oficios",
+  "description": "Limpieza de Albercas",
+  "level": "Avanzado",
+  "area": "Trabajos en General",
+  "active": true
+}
+
+<> 2023-12-09T113812.200.json
+
+###
+
 PUT http://localhost:3001/api/enrollments/1
 Content-Type: application/json
 Content-Length: 80
