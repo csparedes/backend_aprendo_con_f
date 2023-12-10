@@ -8,7 +8,7 @@ const sqlAllDataProfesor= 'SELECT usr.id,usr.name,usr.email,usr.country,usr.city
 'WHERE usr.role = ? AND usr.status = ? '+
 'GROUP BY usr.id, usr.name, usr.email, usr.country, usr.city, usr.imageUrl, usr.hourly_rate, ka.teacher_id, subquery.rating ';
 
-const sqlAllDataProfesorById= 'SELECT usr.id,usr.name,usr.email,usr.country,usr.city,usr.imageUrl,usr.hourly_rate,usr.role,usr.experience,usr.description,ka.teacher_id,GROUP_CONCAT(ka.area SEPARATOR \',\') AS areas,FLOOR(ROUND(subquery.rating,2)) AS rating '+
+const sqlAllDataProfesorById= 'SELECT usr.id,usr.phone, usr.name,usr.email,usr.country,usr.city,usr.imageUrl,usr.hourly_rate,usr.role,usr.experience,usr.description,ka.teacher_id,GROUP_CONCAT(ka.area SEPARATOR \',\') AS areas,FLOOR(ROUND(subquery.rating,2)) AS rating '+
 'FROM teacher_app.User usr LEFT JOIN teacher_app.Knowledge_area ka ON usr.id = ka.teacher_id '+
 'LEFT JOIN ( '+
 '  SELECT enr.teacher_id, AVG(enr.rating) AS rating '+
