@@ -1,3 +1,51 @@
+POST http://localhost:3001/user/login
+Content-Type: application/json
+Content-Length: 65
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "email": "lalinsan@gmail.com",
+  "password": "Panchoniko04"
+}
+
+<> 2023-12-09T213549.200.json
+
+###
+
+POST http://localhost:3001/user/login
+Content-Type: application/json
+Content-Length: 113
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "email": "lalinsan@gmail.com",
+  "password": "$2a$08$SYfad.jswh/Rjzc0yUUyBOJZ1rsFOqfoC1tNMig2offHaw76i0A0K"
+}
+
+<> 2023-12-09T213340.200.json
+
+###
+
+POST http://localhost:3001/user/login
+Content-Type: application/json
+Content-Length: 113
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "email": "lalinsan@gmail.com",
+  "password": "$2a$08$SYfad.jswh/Rjzc0yUUyBOJZ1rsFOqfoC1tNMig2offHaw76i0A0K"
+}
+
+<> 2023-12-09T213336.200.json
+
+###
+
 PUT http://localhost:3001/api/enrollments/1
 Content-Type: application/json
 Content-Length: 80

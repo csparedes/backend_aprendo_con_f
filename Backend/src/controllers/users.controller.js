@@ -138,8 +138,16 @@ const getAllDataEstudianteById = async (req, res) => {
 const getAllProfesor = async (req, res) => {
     try {        
         const [result] = await UserModel.selectAllProfesor();
-        
-        res.json(result);
+        const userLoged = req.user;
+
+        res.json({
+            respuesta : true,
+            mensaje: 'Carga exitosa',
+            resultado: {
+                profesores: result,
+                userLoged: userLoged
+            }
+        });
     } catch (error) {
         res.json({ fatal: error.message });
     }
@@ -148,8 +156,15 @@ const getAllProfesor = async (req, res) => {
 const getAllEstudiante = async (req, res) => {
     try {        
         const [result] = await UserModel.selectAllEstudiante();
-        
-        res.json(result);
+        const userLoged = req.user;
+        res.json({
+            respuesta : true,
+            mensaje: 'Carga exitosa',
+            resultado: {
+                estudiantes: result,
+                userLoged: userLoged
+            }
+        });
     } catch (error) {
         res.json({ fatal: error.message });
     }

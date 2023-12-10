@@ -6,3 +6,13 @@ Content-Type: application/json
   "rating": 4,
   "review": "One of the best installations I have ever seen."
 }
+
+
+### Update Review & Rating
+POST http://localhost:3001/user/login
+Content-Type: application/json
+
+{
+  "email": "pancho",
+  "password": "Panchoniko04"
+}

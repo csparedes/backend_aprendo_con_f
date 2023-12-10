@@ -3,7 +3,7 @@ const router = require('express').Router();
 const EnrollmentController = require('../../controllers/enrollments.controller');
 
 router.get('/', EnrollmentController.getAllEnrollmentStudent);
-//router.post('/', EnrollmentController.createEnrollmentStudent); //crear el enrolamiento de usuarios
+router.post('/', EnrollmentController.createEnrollmentStudent); //crear el enrolamiento de usuarios
 router.put('/:enrollmentId', EnrollmentController.updateReviewRating)//actualiza el review y calificación
 
 //router.get('/average/:userId', EnrollmentController.getAverageRatingById);//promedio del rating por id 
