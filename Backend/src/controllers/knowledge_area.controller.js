@@ -11,13 +11,20 @@ const getAllKnowledge = async (req, res) => {
 }
 
 const createKnowledge = async (req, res) => {
+    console.log('Ingresa al Controller');
     try {
-        console.log('Ingresa al Controller');
+        console.log(req.body);
+        
         const [result] = await KnowledgeModel.insertKnowledgeArea(req.body);
-        const [knowledge] = await KnowledgeModel.selectKnowledgeAreaById(result.insertId)
+        console.log(result);
+        
+        const [knowledge] = await KnowledgeModel.selectKnowledgeAreaById(result.insertId);
+        console.log(knowledge);
         res.json(knowledge);
 
     } catch (error) {
+        console.log(error);
+        
         res.json({ fatal: error.message });
     }
 

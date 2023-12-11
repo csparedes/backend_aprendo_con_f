@@ -16,7 +16,7 @@ const updateReviewRating = async (req, res) => {
     const { rating, review } = req.body;
     try {
         const [result] = await enrollmentModel.updateFeedbackRating(enrollmentId, { rating, review });
-        console.log(result);
+        //console.log(result);
         res.json(result);
     } catch (error) {
         res.json({ fatal: error.message });

@@ -13,7 +13,7 @@ const pool = mysql.createPool({
 
 pool.promise().query('SELECT 1 + 1 AS solution')
   .then(([rows, fields]) => {
-    console.log('The solution is: ', rows[0].solution);
+    //console.log('The solution is: ', rows[0].solution);
     pool.end();
   })
   .catch(err => {

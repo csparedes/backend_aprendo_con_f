@@ -264,7 +264,7 @@ const register = async(req, res) => {
     try {
         // Encriptamos el password
         req.body.password = bcrypt.hashSync(req.body.password, 8);
-        console.log(req.body);
+        //console.log(req.body);
         const [result] = await UserModel.insertUser(req.body);
         const [user] = await UserModel.selectUserById(result.insertId)
         const resultado = {
@@ -298,12 +298,12 @@ const getDataStudentsByIdProfesor = async (req, res) => {
 }
 
 const getDataProfesoresByIdStudent = async (req, res) => {
-    console.log('hola');
+    //console.log('hola');
     try {
         const { userId } = req.params;
-        console.log(userId);
+        //console.log(userId);
         const [result] = await UserModel.selectDataProfesoresByIdStudent(userId);
-        console.log('hola');
+        //console.log('hola');
         res.json(result);
     } catch (error) {
         res.json({ fatal: error.message });
