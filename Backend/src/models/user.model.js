@@ -18,10 +18,12 @@ const sqlAllDataProfesorById= 'SELECT usr.id,usr.name,usr.email,usr.country,usr.
 'WHERE usr.role = ? AND usr.status = ? and usr.id = ? '+
 'GROUP BY usr.id, usr.name, usr.email, usr.country, usr.city, usr.imageUrl, usr.hourly_rate, ka.teacher_id, subquery.rating ';
 
-const sqlDataStudentsByIdProfesor = "SELECT usr.id, usr.name, usr.email, se.teacher_id, GROUP_CONCAT(ka.area SEPARATOR ', ') AS areas " +
+const sqlDataStudentsByIdProfesor = 
+    "SELECT usr.id, usr.name, usr.email, se.teacher_id, GROUP_CONCAT(ka.area SEPARATOR ', ') AS areas " +
     "FROM teacher_app.User usr " +
     "JOIN teacher_app.student_enrollment se ON usr.id = se.student_id " +
-    "JOIN teacher_app.knowledge_area ka ON se.teacher_id = ka.teacher_id";
+    "JOIN teacher_app.knowledge_area ka ON se.teacher_id = ka.teacher_id " +
+    "WHERE usr.status = 'activo'";
 
     const sqlDataProfesoresByIdStudent = 
     "SELECT u.id, u.name, u.email, u.country, u.city, GROUP_CONCAT(ka.area SEPARATOR ', ') AS areas_de_conocimiento " +
@@ -171,9 +173,12 @@ const userByEmail = (correo) => {
 }
 
 /*Get Students by Id Professor*/
+// const selectDataStudentsByIdProfesor = (teacherId) => {
+//     return db.query(sqlDataStudentsByIdProfesor + ' WHERE se.teacher_id = ? GROUP BY usr.id, se.teacher_id;', [teacherId]);
+// }
 const selectDataStudentsByIdProfesor = (teacherId) => {
-    return db.query(sqlDataStudentsByIdProfesor + ' WHERE se.teacher_id = ? GROUP BY usr.id, se.teacher_id;', [teacherId]);
-}
+    return db.query(sqlDataStudentsByIdProfesor + ' AND se.teacher_id = ? GROUP BY usr.id, se.teacher_id;', [teacherId]);
+};
 
 
 /*Get Profesores by Id Student*/
